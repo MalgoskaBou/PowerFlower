@@ -5,8 +5,8 @@ const flowerSchema = new Schema({
   name: String,
   wateringFrequencyInDays: Number,
   lastWatering: Date,
-  zoneID: String,
-  wateringUserID: String,
+  zoneID: Schema.Types.ObjectId,
+  wateringUserID: Schema.Types.ObjectId,
   avatarURL: String
 });
 
