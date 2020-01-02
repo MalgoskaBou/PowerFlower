@@ -5,7 +5,7 @@ const userSchema = new Schema({
   name: String,
   email: String,
   password: String,
-  zoneID: [Schema.Types.ObjectId],
+  zoneIDs: [Schema.Types.ObjectId],
   avatarURL: String
 });
 

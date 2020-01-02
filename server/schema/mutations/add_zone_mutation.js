@@ -10,7 +10,7 @@ const addZone = {
     avatarURL: { type: GraphQLString }
   },
   resolve(parentValue, args) {
-    const { name, flowersID, usersID, avatarURL } = args;
+    const { name, avatarURL } = args;
     let zone = new Zone({
       name,
       avatarURL
@@ -19,4 +19,4 @@ const addZone = {
   }
 };
 
-exports.addZone = addZone;
+module.exports = addZone;

@@ -12,7 +12,7 @@ const UserType = new GraphQLObjectType({
     zones: {
       type: new GraphQLList(ZoneType),
       resolve(parentValue) {
-        return Zone.find({ zoneID: parentValue.id });
+        return Zone.find({ zoneIDs: parentValue.id });
       }
     }
   })

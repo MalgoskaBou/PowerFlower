@@ -34,4 +34,4 @@ const addFlower = {
   }
 };
 
-exports.addFlower = addFlower;
+module.exports = addFlower;

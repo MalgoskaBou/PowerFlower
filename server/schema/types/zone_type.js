@@ -17,7 +17,7 @@ const ZoneType = new GraphQLObjectType({
     users: {
       type: new GraphQLList(UserType),
       resolve(parentValue) {
-        return User.find({ zoneID: parentValue.id }); //UWAGA TABLICA!
+        return User.find({ zoneID: parentValue.id });
       }
     },
     avatarURL: { type: GraphQLString }
