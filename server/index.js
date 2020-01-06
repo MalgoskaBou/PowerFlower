@@ -26,7 +26,6 @@ app.use(
     saveUninitialized: true, // don't create session until something stored
     secret: process.env.SESSION_SECRET,
     store: new MongoStore({
-      //url: process.env.DB_URL,
       mongooseConnection: mongoose.connection,
       autoReconnect: true
     })

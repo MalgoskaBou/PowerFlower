@@ -71,4 +71,10 @@ function login({ email, password, req }) {
   });
 }
 
-module.exports = { signup, login };
+function authorization(req) {
+  if (!req.user) {
+    throw new Error("You must be logged in!");
+  }
+}
+
+module.exports = { signup, login, authorization };

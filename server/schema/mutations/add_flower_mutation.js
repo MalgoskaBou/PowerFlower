@@ -2,6 +2,7 @@ const graphql = require("graphql");
 const { GraphQLString, GraphQLInt, GraphQLID } = graphql;
 const FlowerType = require("../types/flower_type");
 const Flower = require("../../models/flower");
+const { authorization } = require("../../services/auth");
 
 const addFlower = {
   type: FlowerType,
@@ -13,7 +14,8 @@ const addFlower = {
     zoneID: { type: GraphQLID },
     wateringUserID: { type: GraphQLID }
   },
-  resolve(parentValue, args) {
+  resolve(parentValue, args, req) {
+    authorization(req);
     const {
       name,
       wateringFrequencyInDays,
