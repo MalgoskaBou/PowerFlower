@@ -13,9 +13,11 @@ const addZone = {
   resolve(parentValue, args, req) {
     authorization(req);
     const { name, avatarURL } = args;
+    const userID = req.user.id;
     let zone = new Zone({
       name,
-      avatarURL
+      avatarURL,
+      userIDs: [userID]
     });
     return zone.save();
   }

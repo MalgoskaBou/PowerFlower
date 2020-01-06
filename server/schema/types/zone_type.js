@@ -17,7 +17,9 @@ const ZoneType = new GraphQLObjectType({
     users: {
       type: new GraphQLList(UserType),
       resolve(parentValue) {
-        return User.find({ zoneID: parentValue.id });
+        return parentValue.userIDs.map(userId => {
+          return User.findById(userId);
+        });
       }
     },
     avatarURL: { type: GraphQLString }
