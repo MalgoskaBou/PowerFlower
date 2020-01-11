@@ -1,7 +1,7 @@
 const graphql = require("graphql");
 const { GraphQLObjectType, GraphQLString, GraphQLList, GraphQLID } = graphql;
 const Flower = require("../../models/flower");
-const User = require("../../models/user");
+const { User } = require("../../models/user");
 
 const ZoneType = new GraphQLObjectType({
   name: "ZoneType",

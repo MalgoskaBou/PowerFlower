@@ -1,5 +1,5 @@
 const UserType = require("../types/user_type");
-const User = require("../../models/user");
+const { User } = require("../../models/user");
 const { authorization } = require("../../services/auth");
 
 const currentUser = {
