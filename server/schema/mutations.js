@@ -2,7 +2,7 @@ const graphql = require("graphql");
 const { GraphQLObjectType } = graphql;
 const addZone = require("./mutations/add_zone_mutation");
 const addFlower = require("./mutations/add_flower_mutation");
-const user = require("./mutations/user_mutations");
+const user = require("./mutations/auth_mutations");
 
 const mutation = new GraphQLObjectType({
   name: "Mutation",

@@ -1,7 +1,7 @@
 const graphql = require("graphql");
 const { GraphQLString, GraphQLInt, GraphQLID } = graphql;
 const FlowerType = require("../types/flower_type");
-const {Flower, validate} = require("../../models/flower");
+const { Flower, validate } = require("../../models/flower");
 const { authorization } = require("../../services/auth");
 
 const addFlower = {
@@ -27,7 +27,7 @@ const addFlower = {
 
     const { error } = validate(args);
     if (error) throw new Error(error.details[0].message);
-    
+
     let flower = new Flower({
       name,
       wateringFrequencyInDays,
