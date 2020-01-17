@@ -1,7 +1,7 @@
 const graphql = require("graphql");
 const { GraphQLString } = graphql;
 const ZoneType = require("../types/zone_type");
-const {Zone, validate} = require("../../models/zone");
+const { Zone, validate } = require("../../models/zone");
 const { authorization } = require("../../services/auth");
 
 const addZone = {

@@ -20,16 +20,19 @@ function validateFlower(flower) {
       .min(3)
       .max(50)
       .required(),
-    wateringFrequencyInDays: Joi.number().min(1).required(),
+    wateringFrequencyInDays: Joi.number()
+      .min(1)
+      .required(),
     lastWatering: Joi.date(),
     zoneID: Joi.objectId().required(),
     wateringUserID: Joi.objectId(),
-    avatarURL: Joi.string().uri().required()
+    avatarURL: Joi.string()
+      .uri()
+      .required()
   });
 
   return schema.validate(flower);
 }
-
 
 exports.Flower = Flower;
 exports.validate = validateFlower;

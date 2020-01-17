@@ -1,7 +1,7 @@
 const graphql = require("graphql");
 const { GraphQLList } = graphql;
 const FlowerType = require("../types/flower_type");
-const {Flower} = require("../../models/flower");
+const { Flower } = require("../../models/flower");
 
 const flowers = {
   type: new GraphQLList(FlowerType),
