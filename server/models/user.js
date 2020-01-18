@@ -1,4 +1,4 @@
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const mongoose = require("mongoose");
 const Joi = require("@hapi/joi");
 const Schema = mongoose.Schema;
