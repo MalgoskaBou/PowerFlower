@@ -16,7 +16,8 @@ app.use(cors());
 mongoose
   .connect(process.env.DB_URL, {
     useUnifiedTopology: true,
-    useNewUrlParser: true
+    useNewUrlParser: true,
+    useFindAndModify: false
   })
   .then(() => console.log(`Connected to db...`));
 
