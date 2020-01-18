@@ -18,7 +18,9 @@ function validateZone(zone) {
       .max(50)
       .required(),
     userID: Joi.objectId().required(),
-    avatarURL: Joi.string().uri()
+    avatarURL: Joi.string()
+      .uri()
+      .required()
   });
 
   return schema.validate(zone);
