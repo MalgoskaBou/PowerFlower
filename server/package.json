@@ -4,11 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "nodemon": "nodemon index"
+    "nodemon": "nodemon index",
+    "test": "jest --detectOpenHandles"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "jest": "^24.9.0",
     "nodemon": "^2.0.2"
   },
   "dependencies": {

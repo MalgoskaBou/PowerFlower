@@ -15,8 +15,9 @@ function signup({ email, password, name, req }) {
       return user.save();
     })
     .then(user => {
+      sendMailWIthConfirmLink(user, req);
       return new Promise((resolve, reject) => {
-        req.logIn(user, err => {
+        req.login(user, err => {
           if (err) {
             reject(err);
           }
@@ -24,6 +25,10 @@ function signup({ email, password, name, req }) {
         });
       });
     });
+}
+
+function sendMailWIthConfirmLink(user, req) {
+  const url = `${req.headers.host}/confirm/${user._id}`;
 }
 
 function login({ email, password, req }) {

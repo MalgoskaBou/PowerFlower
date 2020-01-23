@@ -7,7 +7,12 @@ const userSchema = new Schema({
   name: String,
   email: String,
   password: String,
-  avatarURL: String
+  avatarURL: String,
+  expireAt: {
+    type: Date,
+    default: Date.now,
+    index: { expires: "30m" }
+  }
 });
 
 userSchema.pre("save", function save(next) {
