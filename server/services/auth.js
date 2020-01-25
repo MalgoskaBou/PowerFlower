@@ -1,6 +1,7 @@
 const passport = require("passport");
 const sendEmail = require("./sendEmail");
 const { User } = require("../models/user");
+const confirmLinkEmailTemplate = require("./confirmLinkEmailTemplate");
 
 function signup({ email, password, name, req }) {
   const user = new User({ email, password, name });
@@ -30,7 +31,8 @@ function signup({ email, password, name, req }) {
 
 function sendMailWIthConfirmLink(user, req) {
   const url = `${req.headers.host}/confirm/${user._id}`;
-  sendEmail(user.email, url);
+  const emailContent = confirmLinkEmailTemplate(url);
+  sendEmail(user.email, emailContent);
 }
 
 function login({ email, password, req }) {
