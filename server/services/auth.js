@@ -1,4 +1,5 @@
 const passport = require("passport");
+const sendEmail = require("./sendEmail");
 const { User } = require("../models/user");
 
 function signup({ email, password, name, req }) {
@@ -29,6 +30,7 @@ function signup({ email, password, name, req }) {
 
 function sendMailWIthConfirmLink(user, req) {
   const url = `${req.headers.host}/confirm/${user._id}`;
+  sendEmail(user.email, url);
 }
 
 function login({ email, password, req }) {
