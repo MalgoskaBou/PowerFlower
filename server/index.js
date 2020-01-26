@@ -7,6 +7,7 @@ const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 const schema = require("./schema/schema");
 const confirmEmail = require("./routes/confirmEmail");
+const googleAuth = require("./routes/googleAuth");
 require("dotenv").config();
 
 const app = express();
@@ -48,6 +49,7 @@ app.use(
 
 app.use(express.json());
 app.use("/confirm", confirmEmail);
+app.use("/auth/google", googleAuth);
 
 app.listen(port, () => {
   console.log(`Listening on port: ${port}`);

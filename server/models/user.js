@@ -13,7 +13,8 @@ const userSchema = new Schema({
     default: Date.now,
     index: { expires: "30m" }
   },
-  confirmed: { type: Boolean, default: false }
+  confirmed: { type: Boolean, default: false },
+  googleId: String
 });
 
 userSchema.pre("save", function save(next) {

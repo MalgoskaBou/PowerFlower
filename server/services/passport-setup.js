@@ -1,6 +1,8 @@
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
+const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const { User } = require("../models/user");
+require("dotenv").config();
 
 passport.serializeUser((user, done) => {
   done(null, user.id);
@@ -32,4 +34,35 @@ passport.use(
       });
     });
   })
+);
+
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: process.env.GOOGLE_ID,
+      clientSecret: process.env.GOOGLE_SECRET,
+      callbackURL: "/auth/google/callback",
+      proxy: true
+    },
+    async (accessToken, refreshToken, profile, done) => {
+      const existingUser = await User.findOne({ googleId: profile.id });
+
+      if (existingUser) {
+        return done(null, existingUser);
+      }
+
+      console.log(profile);
+      const user = new User({
+        googleId: profile.id,
+        name: profile.name.givenName,
+        email: profile.emails[0].value,
+        confirmed: true
+      });
+
+      user.expireAt = undefined;
+
+      await user.save();
+      done(null, user);
+    }
+  )
 );
