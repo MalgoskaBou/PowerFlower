@@ -14,7 +14,7 @@ const removeFlower = {
   resolve: async (parent, args, req) => {
     authorization(req);
     await mutateFlowerValidation(args.id, req.user.id, mutateZoneValidation);
-    return Flower.findById(args.id);
+    return Flower.findByIdAndRemove(args.id);
   }
 };
 

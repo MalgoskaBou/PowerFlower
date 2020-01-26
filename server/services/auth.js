@@ -51,6 +51,9 @@ function authorization(req) {
   if (!req.user) {
     throw new Error("You must be logged in!");
   }
+  if (!req.user.confirmed) {
+    throw new Error("You must confirm your account to use application!");
+  }
 }
 
 module.exports = { signup, login, authorization };
