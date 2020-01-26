@@ -6,6 +6,7 @@ const passport = require("passport");
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 const schema = require("./schema/schema");
+const confirmEmail = require("./routes/confirmEmail");
 require("dotenv").config();
 
 const app = express();
@@ -44,6 +45,9 @@ app.use(
     graphiql: true
   })
 );
+
+app.use(express.json());
+app.use("/confirm", confirmEmail);
 
 app.listen(port, () => {
   console.log(`Listening on port: ${port}`);

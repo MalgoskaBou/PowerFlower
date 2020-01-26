@@ -12,7 +12,8 @@ const userSchema = new Schema({
     type: Date,
     default: Date.now,
     index: { expires: "30m" }
-  }
+  },
+  confirmed: { type: Boolean, default: false }
 });
 
 userSchema.pre("save", function save(next) {
