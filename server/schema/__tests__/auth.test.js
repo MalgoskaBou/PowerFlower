@@ -13,6 +13,7 @@ describe("insert", () => {
       useNewUrlParser: true,
       useFindAndModify: false
     });
+    await connection.connection.db.dropDatabase();
   });
 
   afterAll(async () => {
