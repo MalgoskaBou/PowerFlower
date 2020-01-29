@@ -1,29 +1,13 @@
-const mongoose = require("mongoose");
+const mockingoose = require("mockingoose").default;
 const { User } = require("../../models/user");
-require("dotenv").config();
+const Auth = require("../../services/auth");
 
 const userData = { email: "email1@email.com", password: "dupa", name: "Kitek" };
 
-describe("insert", () => {
-  let connection;
+describe("User auth ", () => {
+  it("sign up user with email which already exist", async () => {
+    mockingoose(User).toReturn(userData, "findOne");
 
-  beforeAll(async () => {
-    connection = await mongoose.connect(process.env.DB_TEST_URL, {
-      useUnifiedTopology: true,
-      useNewUrlParser: true,
-      useFindAndModify: false
-    });
-    await connection.connection.db.dropDatabase();
-  });
-
-  afterAll(async () => {
-    await connection.close();
-  });
-
-  it("create & save user successfully", async () => {
-    const validUser = new User(userData);
-    const savedUser = await validUser.save();
-    expect(savedUser._id).toBeDefined();
-    expect(savedUser.name).toBe(userData.name);
+    Auth.signup(userData).then(err => expect(err).toEqual("Email in use"));
   });
 });

@@ -11,6 +11,7 @@
   "license": "ISC",
   "devDependencies": {
     "jest": "^24.9.0",
+    "mockingoose": "^2.13.2",
     "nodemon": "^2.0.2"
   },
   "dependencies": {
