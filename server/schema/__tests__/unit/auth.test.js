@@ -1,6 +1,6 @@
 const mockingoose = require("mockingoose").default;
-const { User } = require("../../models/user");
-const Auth = require("../../services/auth");
+const { User } = require("../../../models/user");
+const Auth = require("../../../services/auth");
 
 const userData = { email: "email1@email.com", password: "dupa", name: "Kitek" };
 
