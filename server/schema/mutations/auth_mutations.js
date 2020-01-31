@@ -16,7 +16,10 @@ const signup = {
     const { error } = validate({ email, password, name });
     if (error) throw new Error(error.details[0].message);
 
-    return Auth.signup({ email, password, name, req });
+    return Auth.signup({ email, password, name }).then(user => {
+      Auth.sendMailWIthConfirmLink(user, req);
+      return Auth.login({ email, password, req });
+    });
   }
 };
 const logout = {
