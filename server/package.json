@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "nodemon": "nodemon index",
-    "test": "jest --detectOpenHandles"
+    "test": "jest --detectOpenHandles --verbose"
   },
   "author": "",
   "license": "ISC",
@@ -30,5 +30,8 @@
     "passport": "^0.4.1",
     "passport-google-oauth20": "^2.0.0",
     "passport-local": "^1.0.0"
+  },
+  "jest": {
+    "testEnvironment": "node"
   }
 }
