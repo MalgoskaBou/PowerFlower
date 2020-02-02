@@ -1,4 +1,6 @@
 const express = require("express");
+require("express-async-errors");
+require("dotenv").config();
 const mongoose = require("mongoose");
 const cors = require("cors");
 const expressGraphQL = require("express-graphql");
@@ -8,7 +10,7 @@ const MongoStore = require("connect-mongo")(session);
 const schema = require("./schema/schema");
 const confirmEmail = require("./routes/confirmEmail");
 const googleAuth = require("./routes/googleAuth");
-require("dotenv").config();
+const errors = require("./middleware/errors");
 
 const app = express();
 const port = process.env.PORT;
@@ -50,6 +52,8 @@ app.use(
 app.use(express.json());
 app.use("/confirm", confirmEmail);
 app.use("/auth/google", googleAuth);
+
+app.use(errors);
 
 app.listen(port, () => {
   console.log(`Listening on port: ${port}`);
