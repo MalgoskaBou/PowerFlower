@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "nodemon": "nodemon index",
-    "test": "jest --detectOpenHandles --verbose"
+    "test": "jest --detectOpenHandles --verbose --coverage"
   },
   "author": "",
   "license": "ISC",
@@ -30,7 +30,9 @@
     "mongoose": "^5.8.3",
     "passport": "^0.4.1",
     "passport-google-oauth20": "^2.0.0",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "winston": "^3.2.1",
+    "winston-mongodb": "^5.0.1"
   },
   "jest": {
     "testEnvironment": "node"

@@ -1,6 +1,4 @@
 const express = require("express");
-require("express-async-errors");
-require("dotenv").config();
 const mongoose = require("mongoose");
 const cors = require("cors");
 const expressGraphQL = require("express-graphql");
@@ -11,11 +9,15 @@ const schema = require("./schema/schema");
 const confirmEmail = require("./routes/confirmEmail");
 const googleAuth = require("./routes/googleAuth");
 const errors = require("./middleware/errors");
+require("dotenv").config();
+
+require("./services/logging")();
 
 const app = express();
 const port = process.env.PORT;
 
 app.use(cors());
+app.use(express.json());
 
 mongoose
   .connect(process.env.DB_URL, {
@@ -49,7 +51,6 @@ app.use(
   })
 );
 
-app.use(express.json());
 app.use("/confirm", confirmEmail);
 app.use("/auth/google", googleAuth);
 
