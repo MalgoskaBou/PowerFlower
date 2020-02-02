@@ -5,8 +5,8 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
   name: String,
-  email: String,
-  password: String,
+  email: { type: String, required: true },
+  password: { type: String, required: true },
   avatarURL: String,
   expireAt: {
     type: Date,

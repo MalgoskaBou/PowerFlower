@@ -22,6 +22,7 @@ const signup = {
     });
   }
 };
+
 const logout = {
   type: UserType,
   resolve(parentValue, args, req) {
@@ -30,6 +31,7 @@ const logout = {
     return user;
   }
 };
+
 const login = {
   type: UserType,
   args: {
