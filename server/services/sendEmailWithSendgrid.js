@@ -3,7 +3,7 @@ require("dotenv").config();
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-const sendEmail = async (userEmail, content) => {
+const sendEmailWithSendgrid = async (userEmail, content) => {
   const msg = {
     to: userEmail,
     from: "Power.Flower@example.com",
@@ -13,4 +13,4 @@ const sendEmail = async (userEmail, content) => {
   await sgMail.send(msg);
 };
 
-module.exports = sendEmail;
+module.exports = sendEmailWithSendgrid;

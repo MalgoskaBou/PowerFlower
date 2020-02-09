@@ -3,6 +3,7 @@ const { GraphQLString } = graphql;
 const UserType = require("../types/user_type");
 const Auth = require("../../services/auth");
 const { validate } = require("../../models/user");
+const sendEmail = require("../../services/sendEmailWithSendgrid");
 require("../../services/passport-setup");
 
 const signup = {
@@ -17,7 +18,8 @@ const signup = {
     if (error) throw new Error(error.details[0].message);
 
     return Auth.signup({ email, password, name }).then(user => {
-      Auth.sendMailWIthConfirmLink(user, req);
+      const emailContent = Auth.createConfirmationMail(user, req);
+      sendEmail(email, emailContent);
       return Auth.login({ email, password, req });
     });
   }
