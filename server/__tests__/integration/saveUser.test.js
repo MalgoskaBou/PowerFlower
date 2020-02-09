@@ -1,6 +1,5 @@
-const mongoose = require("mongoose");
+const { User } = require("../../models/user");
 const Auth = require("../../services/auth");
-require("dotenv").config();
 
 const userData = {
   email: "email1@email.com",
@@ -9,19 +8,17 @@ const userData = {
 };
 
 describe("User signup", () => {
-  let connection;
+  let server;
 
-  beforeAll(async () => {
-    connection = await mongoose.connect(process.env.DB_TEST_URL, {
-      useUnifiedTopology: true,
-      useNewUrlParser: true,
-      useFindAndModify: false
-    });
-    await connection.connection.db.dropDatabase();
+  beforeEach(() => {
+    server = require("../../index");
   });
-
+  afterEach(async done => {
+    await User.deleteMany({});
+    await server.close(done());
+  });
   afterAll(async () => {
-    await connection.close();
+    await new Promise(resolve => setTimeout(() => resolve(), 500)); // avoid jest open handle error
   });
 
   it("Create & save user successfully", async () => {
@@ -34,7 +31,8 @@ describe("User signup", () => {
     });
   });
 
-  it("Try to register user with existing email in db", () => {
+  it("Try to register user with existing email in db", async () => {
+    await Auth.signup(userData);
     return expect(Auth.signup(userData)).rejects.toThrowError("Email in use");
   });
 
