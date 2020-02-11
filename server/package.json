@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "nodemon": "nodemon index",
-    "test": "jest --detectOpenHandles --verbose --coverage"
+    "test": "jest --detectOpenHandles --forceExit --verbose --coverage"
   },
   "author": "",
   "license": "ISC",
