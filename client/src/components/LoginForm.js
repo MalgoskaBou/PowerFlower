@@ -28,7 +28,7 @@ const LoginForm = () => {
       <Input type="email" name="email" placeholder="e-mail" />
       <Input type="password" name="password" placeholder="Password" />
 
-      <Button type="submit" value="Wyślij">
+      <Button type="submit" value="Log in">
         Log in
       </Button>
       <CustomLink>Forgot password</CustomLink>
