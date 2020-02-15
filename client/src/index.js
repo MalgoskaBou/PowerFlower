@@ -9,8 +9,7 @@ import LoginForm from "./components/LoginForm";
 import Dashboard from "./components/Dashboard";
 
 const client = new ApolloClient({
-  uri: "http://localhost:4000/graphql",
-  dataIdFromObject: object => object.key || null
+  uri: "http://localhost:4000/graphql"
 });
 
 const Root = () => {

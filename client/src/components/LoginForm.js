@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
-import logo from "../img/loginFlower.svg";
 import CustomLink from "./styled/CustomLink"
 import Button from "./styled/Button"
 import Input from "./styled/Input"
 import Wrapper from "./styled/Wrapper"
+import Flower from "./FLowerAnimation"
 
 
 const WrapperLogin = styled(Wrapper)`
@@ -23,7 +23,7 @@ const WrapperLogin = styled(Wrapper)`
 const LoginForm = () => {
   return (
     <WrapperLogin>
-      <img src={logo} style={{ maxWidth: "150px" }} />
+      <Flower/>
 
       <Input type="email" name="email" placeholder="e-mail" />
       <Input type="password" name="password" placeholder="Password" />
