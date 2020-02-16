@@ -10,9 +10,10 @@ export default styled.button`
   letter-spacing: 0.5em;
   width: 50%;
   max-width: 300px;
+  min-width: 200px;
   text-transform: uppercase;
   font-weight: lighter;
   &:focus {
     outline-width: 0;
-}
+  }
 `;

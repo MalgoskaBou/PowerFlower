@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import CustomLink from "./styled/CustomLink";
 import Button from "./styled/Button";
@@ -29,10 +29,14 @@ const onBlur = setFocus => {
 
 const LoginForm = () => {
   const [focus, setFocus] = useState(false);
-  const [inputValue, setInputValue] = React.useState({
+  const [inputValue, setInputValue] = useState({
     email: "",
     password: ""
   });
+  const [eyeMove, setEyeMove] = useState(null);
+
+  const textSize = useRef(null);
+  const emailInputSize = useRef(null);
 
   const handleChange = e => {
     const value = e.target.value;
@@ -42,18 +46,32 @@ const LoginForm = () => {
     });
   };
 
+  const padding = 50;
+  const maxMove = 10;
+
+  useEffect(() => {
+    const calcEyeMOve =
+      ((textSize.current.clientWidth /
+        (emailInputSize.current.clientWidth - padding)) *
+        2 -
+        1) *
+      maxMove;
+    setEyeMove(calcEyeMOve < maxMove ? calcEyeMOve : maxMove);
+  }, [inputValue.email]);
+
   return (
     <WrapperLogin>
-      <Flower focused={focus} />
+      <Flower focused={focus} eyeMove={eyeMove} />
 
       <Input
-        type="email"
+        type="text"
         name="email"
         placeholder="e-mail"
         onFocus={() => onFocus(setFocus)}
         onBlur={() => onBlur(setFocus)}
         value={inputValue.email}
         onChange={handleChange}
+        ref={emailInputSize}
       />
       <Input
         type="password"
@@ -67,6 +85,12 @@ const LoginForm = () => {
         Log in
       </Button>
       <CustomLink>Forgot password</CustomLink>
+      <span
+        ref={textSize}
+        style={{ zIndex: -9999, fontSize: "2.4rem", height: 0 }}
+      >
+        {inputValue.email}
+      </span>
     </WrapperLogin>
   );
 };

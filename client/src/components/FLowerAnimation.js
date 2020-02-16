@@ -7,16 +7,11 @@ const Flower = props => {
 
   useEffect(() => {
     if (props.focused) {
-      gsap.fromTo(
-        eyes.current,
-        0.5,
-        { y: 3 },
-        { y: -3, yoyo: true, repeat: -1 }
-      );
+      gsap.to(eyes.current, 0.5, { x: props.eyeMove, y: 10 });
     } else {
-      gsap.killTweensOf(eyes.current);
+      gsap.to(eyes.current, 0.5, { x: 0, y: 0 });
     }
-  }, [props.focused]);
+  });
 
   return (
     <SvgFlowerStyled
