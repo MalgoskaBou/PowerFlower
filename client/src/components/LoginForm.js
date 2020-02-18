@@ -72,6 +72,7 @@ const LoginForm = () => {
         value={inputValue.email}
         onChange={handleChange}
         ref={emailInputSize}
+        autocomplete="off"
       />
       <Input
         type="password"
@@ -79,6 +80,7 @@ const LoginForm = () => {
         placeholder="Password"
         value={inputValue.password}
         onChange={handleChange}
+        autocomplete="off"
       />
 
       <Button type="submit" value="Log in">
