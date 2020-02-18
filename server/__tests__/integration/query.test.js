@@ -13,6 +13,16 @@ afterAll(async () => {
   // avoid jest open handle error
 });
 
+const exec = async query => {
+  return await request(server)
+    .post("/graphql")
+    .set("Content-Type", "application/json")
+    .set("Accept", "application/json")
+    .send({
+      query
+    });
+};
+
 describe("GraphQL queries", () => {
   it("User is not logged in", async () => {
     const res = await request(server)
@@ -24,18 +34,30 @@ describe("GraphQL queries", () => {
   });
 
   it("Login nonexisting user", async () => {
-    const res = await request(server)
-      .post("/graphql")
-      .set("Content-Type", "application/json")
-      .set("Accept", "application/json")
-      .send({
-                query: `mutation {
+    const query = `mutation {
           loginUser(email:"email5@email.com", password: "dupa"){
             email
             name
           }
-        }`
-      });
+        }`;
+
+    const res = await exec(query);
+
+    expect(res.status).toBe(200);
+    expect(res.text).toMatch(/errors/);
+    expect(res.text).toMatch(/Invalid credentials/);
+  });
+
+  it("Signup user correctly", async () => {
+    const query = `mutation {
+          loginUser(email:"email5@email.com", password: "dupa", name: "kitek"){
+            email
+            name
+          }
+        }`;
+
+    const res = await exec(query);
+
     expect(res.status).toBe(200);
     expect(res.text).toMatch(/errors/);
     expect(res.text).toMatch(/Invalid credentials/);
