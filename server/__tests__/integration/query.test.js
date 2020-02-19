@@ -50,16 +50,16 @@ describe("GraphQL queries", () => {
 
   it("Signup user correctly", async () => {
     const query = `mutation {
-          loginUser(email:"email5@email.com", password: "dupa", name: "kitek"){
+          signupUser(email:"email5@email.com", password: "dupa", name: "kitek"){
             email
             name
+            id
           }
         }`;
 
     const res = await exec(query);
 
-    expect(res.status).toBe(200);
-    expect(res.text).toMatch(/errors/);
-    expect(res.text).toMatch(/Invalid credentials/);
+    expect(res).toHaveProperty("body.data.signupUser");
+    expect(res.body.data.signupUser.email).toMatch("email5@email.com");
   });
 });
