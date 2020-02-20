@@ -62,4 +62,27 @@ describe("GraphQL queries", () => {
     expect(res).toHaveProperty("body.data.signupUser");
     expect(res.body.data.signupUser.email).toMatch("email5@email.com");
   });
+
+  it("Login user correctly", async () => {
+    const querySignUp = `mutation {
+          signupUser(email:"email5@email.com", password: "dupa", name: "kitek"){
+            email
+            name
+            id
+          }
+        }`;
+
+    const queryLogIn = `mutation {
+          loginUser(email:"email5@email.com", password: "dupa"){
+            email
+            name
+          }
+        }`;
+
+    await exec(querySignUp);
+    const res = await exec(queryLogIn);
+
+    expect(res).toHaveProperty("body.data.loginUser");
+    expect(res.body.data.loginUser.email).toMatch("email5@email.com");
+  });
 });
