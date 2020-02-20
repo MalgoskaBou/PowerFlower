@@ -1,15 +1,39 @@
 import React, { useRef, useEffect } from "react";
 import SvgFlowerStyled from "./styled/SvgFloweStyled";
 import gsap from "gsap";
+import kute from "kute.js";
+import "kute.js/kute-svg";
 
 const Flower = props => {
-  const eyes = useRef(null);
+  const face = useRef(null);
+  const eyeR = useRef(null);
+  const eyeOpenR = useRef(null);
 
   useEffect(() => {
     if (props.focused) {
-      gsap.to(eyes.current, 0.5, { x: props.eyeMove, y: 10 });
+      //gsap.to(eyes.current, 0.5, { x: props.eyeMove, y: 10 });
+      kute
+        .to(face.current, { translateX: props.eyeMove, translateY: 10 })
+        .start();
+
+      kute
+        .to(
+          eyeR.current,
+          {
+            path: eyeOpenR.current
+          },
+          {
+            duration: 1200,
+            easing: "easingQuinticInOut"
+          }
+        )
+        .start();
+
+      console.log(eyeR.current);
+      console.log(eyeOpenR.current);
     } else {
-      gsap.to(eyes.current, 0.5, { x: 0, y: 0 });
+      //gsap.to(eyes.current, 0.5, { x: 0, y: 0 });
+      kute.to(face.current, { translateX: 0, translateY: 0 }).start();
     }
   });
 
@@ -144,9 +168,10 @@ const Flower = props => {
                   <path className="st8" d="M89.3,127.5c0,0,7.6-1.2,16.7-0.1" />
                 </g>
               </g>
-              <g id="face" ref={eyes}>
+              <g id="face" ref={face}>
                 <g id="eyes">
                   <path
+                    ref={eyeR}
                     id="eyeR_12_"
                     className="st9"
                     d="M83.4,171.9c-0.9,0-1.6-0.7-1.6-1.6c0-2.6-0.6-8.7-6.7-8.7c-2.5,0-5.9,0.9-5.9,8.7
@@ -160,6 +185,20 @@ const Flower = props => {
 							C132.5,171.2,131.8,171.9,130.9,171.9z"
                   />
                 </g>
+
+                <path
+                  ref={eyeOpenR}
+                  style={{ visibility: "hidden" }}
+                  id="openEyeR_1_"
+                  class="st11"
+                  d="M79.3,166.3c0,2.4-2,4.4-4.4,4.4s-4.4-2-4.4-4.4s2-4.4,4.4-4.4S79.3,163.9,79.3,166.3z"
+                />
+                <path
+                  id="openEyeL_1_"
+                  class="st11"
+                  d="M127.4,166.3c0,2.4-2,4.4-4.4,4.4s-4.4-2-4.4-4.4s2-4.4,4.4-4.4S127.4,163.9,127.4,166.3z"
+                />
+
                 <g id="cheeks">
                   <path
                     id="cheekR_12_"
