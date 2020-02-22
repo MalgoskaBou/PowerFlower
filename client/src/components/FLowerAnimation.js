@@ -1,15 +1,27 @@
 import React, { useRef, useEffect } from "react";
 import SvgFlowerStyled from "./styled/SvgFloweStyled";
-import gsap from "gsap";
+import anime from "animejs";
 
 const Flower = props => {
-  const eyes = useRef(null);
+  const face = useRef(null);
+  const eyeR = useRef(null);
+  const eyeOpenR = useRef(null);
 
   useEffect(() => {
     if (props.focused) {
-      gsap.to(eyes.current, 0.5, { x: props.eyeMove, y: 10 });
+      anime({
+        targets: face.current,
+        translateX: props.eyeMove,
+        translateY: 10,
+        easing: "easeOutQuad"
+      });
     } else {
-      gsap.to(eyes.current, 0.5, { x: 0, y: 0 });
+      anime({
+        targets: face.current,
+        translateX: 0,
+        translateY: 0,
+        easing: "easeOutQuad"
+      });
     }
   });
 
@@ -144,9 +156,10 @@ const Flower = props => {
                   <path className="st8" d="M89.3,127.5c0,0,7.6-1.2,16.7-0.1" />
                 </g>
               </g>
-              <g id="face" ref={eyes}>
+              <g id="face" ref={face}>
                 <g id="eyes">
                   <path
+                    ref={eyeR}
                     id="eyeR_12_"
                     className="st9"
                     d="M83.4,171.9c-0.9,0-1.6-0.7-1.6-1.6c0-2.6-0.6-8.7-6.7-8.7c-2.5,0-5.9,0.9-5.9,8.7
@@ -160,6 +173,24 @@ const Flower = props => {
 							C132.5,171.2,131.8,171.9,130.9,171.9z"
                   />
                 </g>
+
+                <path
+                  id="openEyeR"
+                  ref={eyeOpenR}
+                  style={{ visibility: "hidden" }}
+                  class="st11"
+                  d="M83,166.1c0,1.6-0.5,3.1-1.3,4.4c-0.7,1.1-1.7,2-2.8,2.6c-1.1,0.6-2.3,1-3.6,1.1
+	c-1.7,0-3.4-0.6-4.7-1.5c-0.9-0.7-1.7-1.6-2.2-2.6c-0.6-1.1-0.9-2.3-0.9-3.6c0-4.3,3.5-7.8,7.8-8.1C79.5,158.4,83,161.8,83,166.1z"
+                />
+                <path
+                  id="openEyeL"
+                  style={{ visibility: "hidden" }}
+                  class="st11"
+                  d="M131.1,166.1c0,1.6-0.5,3.1-1.3,4.4c-0.7,1.1-1.7,2-2.8,2.6c-1.1,0.6-2.3,1-3.6,1.1
+	c-1.7,0-3.4-0.6-4.7-1.5c-0.9-0.7-1.7-1.6-2.2-2.6c-0.6-1.1-0.9-2.3-0.9-3.6c0-4.3,3.5-7.8,7.8-8.1
+	C127.7,158.4,131.2,161.8,131.1,166.1z"
+                />
+
                 <g id="cheeks">
                   <path
                     id="cheekR_12_"
