@@ -19,16 +19,11 @@ const WrapperLogin = styled(Wrapper)`
   }
 `;
 
-const onFocus = setFocus => {
-  setFocus(true);
-};
-
-const onBlur = setFocus => {
-  setFocus(false);
-};
-
 const LoginForm = () => {
-  const [focus, setFocus] = useState(false);
+  const [focus, setFocus] = useState({
+    email: false,
+    password: false
+  });
   const [inputValue, setInputValue] = useState({
     email: "",
     password: ""
@@ -43,6 +38,20 @@ const LoginForm = () => {
     setInputValue({
       ...inputValue,
       [e.target.name]: value
+    });
+  };
+
+  const onFocus = e => {
+    setFocus({
+      ...focus,
+      [e.target.name]: true
+    });
+  };
+
+  const onBlur = e => {
+    setFocus({
+      ...focus,
+      [e.target.name]: false
     });
   };
 
@@ -67,8 +76,8 @@ const LoginForm = () => {
         type="text"
         name="email"
         placeholder="e-mail"
-        onFocus={() => onFocus(setFocus)}
-        onBlur={() => onBlur(setFocus)}
+        onFocus={onFocus}
+        onBlur={onBlur}
         value={inputValue.email}
         onChange={handleChange}
         ref={emailInputSize}
@@ -77,6 +86,8 @@ const LoginForm = () => {
       <Input
         type="password"
         name="password"
+        onFocus={onFocus}
+        onBlur={onBlur}
         placeholder="Password"
         value={inputValue.password}
         onChange={handleChange}

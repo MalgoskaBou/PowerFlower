@@ -1,15 +1,79 @@
 import React, { useRef, useEffect } from "react";
 import SvgFlowerStyled from "./styled/SvgFloweStyled";
-import gsap from "gsap";
+import anime from "animejs";
+import { interpolate } from "flubber";
 
 const Flower = props => {
-  const eyes = useRef(null);
+  const face = useRef(null);
+  const eyeR = useRef(null);
+  const eyeL = useRef(null);
+  const { email, password } = props.focused;
+
+  const PATHS = {
+    eyeL:
+      "M130.9,171.9c-0.9,0-1.6-0.7-1.6-1.6c0-7.9-3.4-8.7-5.9-8.7c-6,0-6.7,6.1-6.7,8.7c0,0.9-0.7,1.6-1.6,1.6c-0.9,0-1.6-0.7-1.6-1.6c0-7.4,3.8-11.9,10-11.9c4.1,0,9.1,2,9.1,11.9C132.5,171.2,131.8,171.9,130.9,171.9z",
+
+    eyeR:
+      "M83.4,171.9c-0.9,0-1.6-0.7-1.6-1.6c0-2.6-0.6-8.7-6.7-8.7c-2.5,0-5.9,0.9-5.9,8.7c0,0.9-0.7,1.6-1.6,1.6c-0.9,0-1.6-0.7-1.6-1.6c0-9.9,5-11.9,9.1-11.9c6.1,0,10,4.7,10,11.9C85.1,171.2,84.3,171.9,83.4,171.9z",
+
+    openEyeR:
+      "M83,166.1c0,1.6-0.5,3.1-1.3,4.4c-0.7,1.1-1.7,2-2.8,2.6c-1.1,0.6-2.3,1-3.6,1.1c-1.7,0-3.4-0.6-4.7-1.5c-0.9-0.7-1.7-1.6-2.2-2.6c-0.6-1.1-0.9-2.3-0.9-3.6c0-4.3,3.5-7.8,7.8-8.1C79.5,158.4,83,161.8,83,166.1z",
+
+    openEyeL:
+      "M131.1,166.1c0,1.6-0.5,3.1-1.3,4.4c-0.7,1.1-1.7,2-2.8,2.6c-1.1,0.6-2.3,1-3.6,1.1c-1.7,0-3.4-0.6-4.7-1.5c-0.9-0.7-1.7-1.6-2.2-2.6c-0.6-1.1-0.9-2.3-0.9-3.6c0-4.3,3.5-7.8,7.8-8.1C127.7,158.4,131.2,161.8,131.1,166.1z",
+
+    closedEyeL:
+      "M128.3,171.7c-0.1,0-0.2,0-0.3,0l-13.6-2.8c-0.6-0.1-1.1-0.7-1.2-1.3c-0.1-0.7,0.3-1.3,0.9-1.5l13.6-5.8c0.8-0.3,1.6,0,2,0.8c0.3,0.8,0,1.6-0.8,2l-9.1,3.9l8.8,1.8c0.8,0.2,1.3,1,1.2,1.8C129.6,171.2,129,171.7,128.3,171.7z",
+
+    closedEyeR:
+      "M68.5,171.7c-0.7,0-1.3-0.5-1.5-1.2c-0.1-0.8,0.4-1.6,1.2-1.7l10.2-1.8L68,163.1c-0.8-0.3-1.2-1.1-0.9-1.9c0.3-0.8,1.1-1.2,1.9-0.9l15.8,5.8c0.6,0.2,1,0.9,1,1.5s-0.6,1.2-1.2,1.3l-15.8,2.8C68.7,171.7,68.6,171.7,68.5,171.7z"
+  };
+
+  const animateTo = (ref, posX, posY) => {
+    anime({
+      targets: ref.current,
+      translateX: posX,
+      translateY: posY,
+      easing: "easeOutBack"
+    });
+  };
+
+  const morphTo = (ref, targetPath) => {
+    const interpolator = interpolate(
+      ref.current.getAttribute("d"),
+      targetPath,
+      {
+        maxSegmentLength: 2
+      }
+    );
+
+    let val = { prop: 0 };
+
+    anime({
+      targets: val,
+      prop: 100,
+      easing: "linear",
+      round: 1,
+      duration: 100,
+      update: function() {
+        ref.current.setAttribute("d", interpolator(val.prop / 100));
+      }
+    });
+  };
 
   useEffect(() => {
-    if (props.focused) {
-      gsap.to(eyes.current, 0.5, { x: props.eyeMove, y: 10 });
-    } else {
-      gsap.to(eyes.current, 0.5, { x: 0, y: 0 });
+    if (email) {
+      animateTo(face, props.eyeMove, 10);
+      morphTo(eyeR, PATHS.openEyeR);
+      morphTo(eyeL, PATHS.openEyeL);
+    } else if (password) {
+      animateTo(face, 0, -10);
+      morphTo(eyeR, PATHS.closedEyeR);
+      morphTo(eyeL, PATHS.closedEyeL);
+    } else if (!password && !email) {
+      animateTo(face, 0, 0);
+      morphTo(eyeR, PATHS.eyeR);
+      morphTo(eyeL, PATHS.eyeL);
     }
   });
 
@@ -144,9 +208,10 @@ const Flower = props => {
                   <path className="st8" d="M89.3,127.5c0,0,7.6-1.2,16.7-0.1" />
                 </g>
               </g>
-              <g id="face" ref={eyes}>
+              <g id="face" ref={face}>
                 <g id="eyes">
                   <path
+                    ref={eyeR}
                     id="eyeR_12_"
                     className="st9"
                     d="M83.4,171.9c-0.9,0-1.6-0.7-1.6-1.6c0-2.6-0.6-8.7-6.7-8.7c-2.5,0-5.9,0.9-5.9,8.7
@@ -154,6 +219,7 @@ const Flower = props => {
                   />
                   <path
                     id="eyeL_12_"
+                    ref={eyeL}
                     className="st9"
                     d="M130.9,171.9c-0.9,0-1.6-0.7-1.6-1.6c0-7.9-3.4-8.7-5.9-8.7c-6,0-6.7,6.1-6.7,8.7
 							c0,0.9-0.7,1.6-1.6,1.6c-0.9,0-1.6-0.7-1.6-1.6c0-7.4,3.8-11.9,10-11.9c4.1,0,9.1,2,9.1,11.9
