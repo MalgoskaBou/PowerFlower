@@ -1,4 +1,8 @@
 const request = require("supertest");
+const {
+  queryLogIn,
+  querySignUp
+} = require("../../testHelpers/queriesTestHelper");
 
 let server;
 
@@ -34,14 +38,7 @@ describe("GraphQL queries", () => {
   });
 
   it("Login nonexisting user", async () => {
-    const query = `mutation {
-          loginUser(email:"email5@email.com", password: "dupa"){
-            email
-            name
-          }
-        }`;
-
-    const res = await exec(query);
+    const res = await exec(queryLogIn);
 
     expect(res.status).toBe(200);
     expect(res.text).toMatch(/errors/);
@@ -49,36 +46,13 @@ describe("GraphQL queries", () => {
   });
 
   it("Signup user correctly", async () => {
-    const query = `mutation {
-          signupUser(email:"email5@email.com", password: "dupa", name: "kitek"){
-            email
-            name
-            id
-          }
-        }`;
-
-    const res = await exec(query);
+    const res = await exec(querySignUp);
 
     expect(res).toHaveProperty("body.data.signupUser");
     expect(res.body.data.signupUser.email).toMatch("email5@email.com");
   });
 
   it("Login user correctly", async () => {
-    const querySignUp = `mutation {
-          signupUser(email:"email5@email.com", password: "dupa", name: "kitek"){
-            email
-            name
-            id
-          }
-        }`;
-
-    const queryLogIn = `mutation {
-          loginUser(email:"email5@email.com", password: "dupa"){
-            email
-            name
-          }
-        }`;
-
     await exec(querySignUp);
     const res = await exec(queryLogIn);
 
