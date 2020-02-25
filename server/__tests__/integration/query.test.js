@@ -4,6 +4,7 @@ const {
   querySignUp,
   userData
 } = require("../../testHelpers/queriesTestHelper");
+const {User} = require("../../models/user")
 
 let server;
 
@@ -11,6 +12,7 @@ beforeEach(() => {
   server = require("../../index");
 });
 afterEach(async () => {
+  await User.deleteMany({});
   await server.close();
 });
 afterAll(async () => {
