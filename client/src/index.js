@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
+import PrivateRoute from "./components/PrivateRouter";
 import "./index.css";
 
 import LoginForm from "./components/LoginForm";
@@ -19,9 +20,9 @@ const Root = () => {
         <Route exact path="/">
           <LoginForm />
         </Route>
-        <Route path="/dashboard">
+        <PrivateRoute path="/dashboard">
           <Dashboard />
-        </Route>
+        </PrivateRoute>
       </Router>
     </ApolloProvider>
   );
