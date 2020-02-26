@@ -10,7 +10,7 @@ import LoginForm from "./components/LoginForm";
 import Dashboard from "./components/Dashboard";
 
 const client = new ApolloClient({
-  uri: "http://localhost:4000/graphql"
+  uri: "https://powerflowerbe.herokuapp.com/graphql"
 });
 
 const Root = () => {
