@@ -6,74 +6,73 @@ const {
 } = require("../../testHelpers/queriesTestHelper");
 const {User} = require("../../models/user")
 
-let server;
+describe("Authentication user", () => {
 
-beforeEach(() => {
-  server = require("../../index");
-});
-afterEach(async () => {
-  await User.deleteMany({});
-  await server.close();
-});
-afterAll(async () => {
-  await new Promise(resolve => setTimeout(() => resolve(), 500));
-  // avoid jest open handle error
-});
+  let server;
 
-const exec = async query => {
-  return await request(server)
-    .post("/graphql")
-    .set("Content-Type", "application/json")
-    .set("Accept", "application/json")
-    .send({
-      query
-    });
-};
+  beforeEach(() => {
+    server = require("../../index");
+  });
+  afterEach(async () => {
+    await User.deleteMany({});
+    await server.close();
+  });
 
-describe("GraphQL queries for user", () => {
-  it("User is not logged in", async () => {
-    const res = await request(server)
+  const exec = async query => {
+    return await request(server)
       .post("/graphql")
-      .send({ query: "{ currentUser { id } }" });
-    expect(res.status).toBe(200);
-    expect(res.text).toMatch(/errors/);
-    expect(res.text).toMatch(/logged in/);
-  });
+      .set("Content-Type", "application/json")
+      .set("Accept", "application/json")
+      .send({
+        query
+      });
+  };
 
-  it("Login nonexisting user", async () => {
-    const query = queryLogIn();
-    const res = await exec(query);
+  describe("GraphQL queries for user", () => {
+    it("User is not logged in", async () => {
+      const res = await request(server)
+        .post("/graphql")
+        .send({ query: "{ currentUser { id } }" });
+      expect(res.status).toBe(200);
+      expect(res.text).toMatch(/errors/);
+      expect(res.text).toMatch(/logged in/);
+    });
 
-    expect(res.status).toBe(200);
-    expect(res.text).toMatch(/errors/);
-    expect(res.text).toMatch(/Invalid credentials/);
-  });
+    it("Login nonexisting user", async () => {
+      const query = queryLogIn();
+      const res = await exec(query);
 
-  it("Signup user correctly", async () => {
-    const query = querySignUp();
-    const res = await exec(query);
+      expect(res.status).toBe(200);
+      expect(res.text).toMatch(/errors/);
+      expect(res.text).toMatch(/Invalid credentials/);
+    });
 
-    expect(res).toHaveProperty("body.data.signupUser");
-    expect(res.body.data.signupUser.email).toMatch(userData.userEmail);
-  });
+    it("Signup user correctly", async () => {
+      const query = querySignUp();
+      const res = await exec(query);
 
-  it("Signup user without email", async () => {
-    const email = "";
-    const query = querySignUp(email);
-    const res = await exec(query);
+      expect(res).toHaveProperty("body.data.signupUser");
+      expect(res.body.data.signupUser.email).toMatch(userData.userEmail);
+    });
 
-    expect(res.text).toMatch(/errors/);
-    expect(res.text).toMatch(/\\\"email\\\" is not allowed to be empty/);
-  });
+    it("Signup user without email", async () => {
+      const email = "";
+      const query = querySignUp(email);
+      const res = await exec(query);
 
-  it("Login user correctly", async () => {
-    const queryForSignUp = querySignUp();
-    const queryForLogIn = queryLogIn();
+      expect(res.text).toMatch(/errors/);
+      expect(res.text).toMatch(/\\\"email\\\" is not allowed to be empty/);
+    });
 
-    await exec(queryForSignUp);
-    const res = await exec(queryForLogIn);
+    it("Login user correctly", async () => {
+      const queryForSignUp = querySignUp();
+      const queryForLogIn = queryLogIn();
 
-    expect(res).toHaveProperty("body.data.loginUser");
-    expect(res.body.data.loginUser.email).toMatch(userData.userEmail);
+      await exec(queryForSignUp);
+      const res = await exec(queryForLogIn);
+
+      expect(res).toHaveProperty("body.data.loginUser");
+      expect(res.body.data.loginUser.email).toMatch(userData.userEmail);
+    });
   });
 });

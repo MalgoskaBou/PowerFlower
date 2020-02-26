@@ -7,7 +7,7 @@ const userData = {
   name: "Kitek"
 };
 
-describe.skip("User signup", () => {
+describe("User signup", () => {
   let server;
 
   beforeEach(() => {
