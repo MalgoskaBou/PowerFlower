@@ -59,13 +59,13 @@ const LoginForm = () => {
   const maxMove = 10;
 
   useEffect(() => {
-    const calcEyeMOve =
+    const calcEyeMove =
       ((textSize.current.clientWidth /
         (emailInputSize.current.clientWidth - padding)) *
         2 -
         1) *
       maxMove;
-    setEyeMove(calcEyeMOve < maxMove ? calcEyeMOve : maxMove);
+    setEyeMove(calcEyeMove < maxMove ? calcEyeMove : maxMove);
   }, [inputValue.email]);
 
   return (
