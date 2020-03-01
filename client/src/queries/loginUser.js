@@ -1,8 +1,8 @@
 import { gql } from "apollo-boost";
 
 export default gql`
-   mutation LoginUser($nemail: String!, $password: String!) {{
-    loginUser(email: "email5@email.com", password: "dupa") {
+  mutation LoginUser($email: String!, $password: String!) {
+    loginUser(email: $email, password: $password) {
       email
       name
     }

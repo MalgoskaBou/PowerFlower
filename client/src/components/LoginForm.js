@@ -1,5 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
+import { useMutation } from "@apollo/react-hooks";
+import loginUserMutation from "../queries/loginUser";
 import CustomLink from "./styled/CustomLink";
 import Button from "./styled/Button";
 import Input from "./styled/Input";
@@ -33,12 +35,29 @@ const LoginForm = () => {
   const textSize = useRef(null);
   const emailInputSize = useRef(null);
 
+  const [loginUser] = useMutation(loginUserMutation);
+
   const handleChange = e => {
     const value = e.target.value;
     setInputValue({
       ...inputValue,
       [e.target.name]: value
     });
+  };
+
+  const handleClick = async e => {
+    e.preventDefault();
+    try {
+      const user = await loginUser({
+        variables: {
+          email: inputValue.email,
+          password: inputValue.password
+        }
+      });
+      console.log(user);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const onFocus = e => {
@@ -94,7 +113,7 @@ const LoginForm = () => {
         autocomplete="off"
       />
 
-      <Button type="submit" value="Log in">
+      <Button type="submit" value="Log in" onClick={handleClick}>
         Log in
       </Button>
       <CustomLink>Forgot password</CustomLink>
