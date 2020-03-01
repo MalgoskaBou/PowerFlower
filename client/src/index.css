@@ -5,7 +5,14 @@
   margin: 0;
   padding: 0;
   font-family: "Lato", sans-serif;
+}
+
+html {
   font-size: 62.5%;
+}
+
+body {
+  font-size: 1.8rem;
 }
 
 /* Ugly trick to remove highlite of autofill inputs on chrome */
