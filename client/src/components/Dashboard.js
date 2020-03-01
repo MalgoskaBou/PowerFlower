@@ -4,13 +4,13 @@ import { useQuery } from "@apollo/react-hooks";
 
 const Dashboard = () => {
   const { loading, error, data } = useQuery(currentUserQuery);
-  console.log("test", error);
+  console.log("test", data);
 
   return (
     <div>
-      Dashboard - only login
-      {error?.graphQLErrors.map(({ message }, i) => (
-        <p key={i}>{message}</p>
+      Dashboard - Your zones:
+      {data?.currentUser?.zones?.map(({ name, id }) => (
+        <p key={id}>{name}</p>
       ))}
     </div>
   );

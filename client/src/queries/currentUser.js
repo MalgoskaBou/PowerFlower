@@ -4,6 +4,10 @@ export default gql`
   {
     currentUser {
       name
+      zones {
+        id
+        name
+      }
     }
   }
 `;
