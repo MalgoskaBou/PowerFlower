@@ -4,13 +4,15 @@ import currentUserQuery from "../queries/currentUser";
 import { useQuery } from "@apollo/react-hooks";
 
 function PrivateRoute({ children, ...rest }) {
-  const { data } = useQuery(currentUserQuery);
+  const { loading, data } = useQuery(currentUserQuery);
 
-  return (
+  return loading ? (
+    <div>Loading...</div>
+  ) : (
     <Route
       {...rest}
       render={() =>
-        data?.currentUserQuery ? (
+        data?.currentUser ? (
           children
         ) : (
           <Redirect
