@@ -25,7 +25,7 @@ function login({ email, password, req }) {
         reject("Invalid credentials.");
       }
 
-      req.login(user, () => resolve(user));
+      req.logIn(user, () => resolve(user));
     })({ body: { email, password } });
   });
 }
