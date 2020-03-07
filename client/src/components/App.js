@@ -8,7 +8,6 @@ import Dashboard from "./Dashboard";
 
 const App = () => {
   const userData = useContext(UserProvider.context);
-  console.log("user", userData);
   return (
     <Router>
       <Route exact path="/">
