@@ -1,5 +1,11 @@
 const graphql = require("graphql");
-const { GraphQLObjectType, GraphQLString, GraphQLID, GraphQLList } = graphql;
+const {
+  GraphQLObjectType,
+  GraphQLString,
+  GraphQLID,
+  GraphQLList,
+  GraphQLBoolean
+} = graphql;
 const { Zone } = require("../../models/zone");
 
 const UserType = new GraphQLObjectType({
@@ -9,6 +15,7 @@ const UserType = new GraphQLObjectType({
     name: { type: GraphQLString },
     email: { type: GraphQLString },
     avatarURL: { type: GraphQLString },
+    confirmed: { type: GraphQLBoolean },
     zones: {
       type: new GraphQLList(ZoneType),
       resolve(parentValue) {

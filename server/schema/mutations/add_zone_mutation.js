@@ -2,7 +2,7 @@ const graphql = require("graphql");
 const { GraphQLString } = graphql;
 const ZoneType = require("../types/zone_type");
 const { Zone, validate } = require("../../models/zone");
-const { authorization } = require("../../services/auth");
+const { authorization, accountConfirm } = require("../../services/auth");
 
 const addZone = {
   type: ZoneType,
@@ -12,6 +12,7 @@ const addZone = {
   },
   resolve(parentValue, args, req) {
     authorization(req);
+    accountConfirm(req);
     const { name, avatarURL } = args;
     const userID = req.user.id;
 

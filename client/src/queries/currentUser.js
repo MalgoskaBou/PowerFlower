@@ -4,6 +4,7 @@ export default gql`
   {
     currentUser {
       name
+      confirmed
       zones {
         id
         name
