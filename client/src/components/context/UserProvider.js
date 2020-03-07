@@ -9,7 +9,7 @@ const UserProvider = ({ children }) => {
 
   useEffect(() => {
     setUser({ user: data?.currentUser, loading });
-  }, [loading]);
+  }, [loading, data]);
 
   return <context.Provider value={user}>{children}</context.Provider>;
 };

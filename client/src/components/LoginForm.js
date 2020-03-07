@@ -7,6 +7,7 @@ import Button from "./styled/Button";
 import Input from "./styled/Input";
 import Wrapper from "./styled/Wrapper";
 import Flower from "./FLowerAnimation";
+import currentUserQuery from "../queries/currentUser";
 
 const WrapperLogin = styled(Wrapper)`
   display: flex;
@@ -53,7 +54,8 @@ const LoginForm = () => {
         variables: {
           email: inputValue.email,
           password: inputValue.password
-        }
+        },
+        refetchQueries: [{ query: currentUserQuery }]
       });
       console.log(user);
     } catch (err) {
