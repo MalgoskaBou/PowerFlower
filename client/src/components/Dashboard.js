@@ -1,17 +1,17 @@
-import React from "react";
-import currentUserQuery from "../queries/currentUser";
-import { useQuery } from "@apollo/react-hooks";
+import React, { useContext } from "react";
+import UserProvider from "./context/UserProvider";
 
 const Dashboard = () => {
-  const { loading, error, data } = useQuery(currentUserQuery);
-  console.log("test", data);
+  const userData = useContext(UserProvider.context);
 
   return (
     <div>
       Dashboard - Your zones:
-      {data?.currentUser?.zones?.map(({ name, id }) => (
+      {userData.user.zones?.map(({ name, id }) => (
         <p key={id}>{name}</p>
       ))}
+      <p>{`${userData.user.confirmed}`}</p>
+      <p>{`${userData.user.name}`}</p>
     </div>
   );
 };

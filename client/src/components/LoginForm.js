@@ -47,8 +47,9 @@ const LoginForm = () => {
 
   const handleClick = async e => {
     e.preventDefault();
+    let user;
     try {
-      const user = await loginUser({
+      user = await loginUser({
         variables: {
           email: inputValue.email,
           password: inputValue.password

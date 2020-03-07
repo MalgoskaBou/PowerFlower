@@ -1,18 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Route, Redirect } from "react-router-dom";
-import currentUserQuery from "../queries/currentUser";
-import { useQuery } from "@apollo/react-hooks";
+import UserProvider from "./context/UserProvider";
 
 function PrivateRoute({ children, ...rest }) {
-  const { loading, data } = useQuery(currentUserQuery);
+  const userData = useContext(UserProvider.context);
 
-  return loading ? (
+  return userData?.loading ? (
     <div>Loading...</div>
   ) : (
     <Route
       {...rest}
       render={() =>
-        data?.currentUser ? (
+        userData?.user ? (
           children
         ) : (
           <Redirect

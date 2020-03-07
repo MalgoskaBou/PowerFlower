@@ -1,30 +1,23 @@
-import React from "react";
+import React, { useContext } from "react";
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
-import ApolloClient from "apollo-boost";
-import { ApolloProvider } from "react-apollo";
 import PrivateRoute from "./PrivateRouter";
+import UserProvider from "./context/UserProvider";
 
 import LoginForm from "./LoginForm";
 import Dashboard from "./Dashboard";
 
-const client = new ApolloClient({
-  credentials: "include",
-  uri: "http://localhost:4000/graphql"
-});
-
 const App = () => {
-  const loggedIn = false;
+  const userData = useContext(UserProvider.context);
+  console.log("user", userData);
   return (
-    <ApolloProvider client={client}>
-      <Router>
-        <Route exact path="/">
-          {loggedIn ? <Redirect to="/dashboard" /> : <LoginForm />}
-        </Route>
-        <PrivateRoute path="/dashboard">
-          <Dashboard />
-        </PrivateRoute>
-      </Router>
-    </ApolloProvider>
+    <Router>
+      <Route exact path="/">
+        {userData?.user ? <Redirect to="/dashboard" /> : <LoginForm />}
+      </Route>
+      <PrivateRoute path="/dashboard">
+        <Dashboard />
+      </PrivateRoute>
+    </Router>
   );
 };
 
