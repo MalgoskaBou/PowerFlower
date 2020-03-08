@@ -1,13 +1,13 @@
 import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import { useMutation } from "@apollo/react-hooks";
-import loginUserMutation from "../queries/loginUser";
-import CustomLink from "./styled/CustomLink";
-import Button from "./styled/Button";
-import Input from "./styled/Input";
-import Wrapper from "./styled/Wrapper";
+import loginUserMutation from "../../queries/loginUser";
+import CustomLink from "../styled/CustomLink";
+import Button from "../styled/Button";
+import Input from "../styled/Input";
+import Wrapper from "../styled/Wrapper";
 import Flower from "./FLowerAnimation";
-import currentUserQuery from "../queries/currentUser";
+import currentUserQuery from "../../queries/currentUser";
 
 const WrapperLogin = styled(Wrapper)`
   display: flex;
@@ -58,9 +58,8 @@ const LoginForm = () => {
 
   const handleLoginUser = async e => {
     e.preventDefault();
-    let user;
     try {
-      user = await loginUser({
+      await loginUser({
         variables: {
           email: inputValue.email,
           password: inputValue.password

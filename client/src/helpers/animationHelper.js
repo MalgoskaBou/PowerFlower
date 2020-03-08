@@ -23,7 +23,7 @@ const PATHS = {
 
 const animateTo = (ref, posX, posY) => {
   anime({
-    targets: ref.current,
+    targets: ref,
     translateX: posX,
     translateY: posY,
     easing: "easeOutBack"
@@ -31,7 +31,7 @@ const animateTo = (ref, posX, posY) => {
 };
 
 const morphTo = (ref, targetPath) => {
-  const interpolator = interpolate(ref.current.getAttribute("d"), targetPath, {
+  const interpolator = interpolate(ref.getAttribute("d"), targetPath, {
     maxSegmentLength: 2
   });
 
@@ -44,7 +44,7 @@ const morphTo = (ref, targetPath) => {
     round: 1,
     duration: 100,
     update: function() {
-      ref.current.setAttribute("d", interpolator(val.prop / 100));
+      ref.setAttribute("d", interpolator(val.prop / 100));
     }
   });
 };
