@@ -1,5 +1,10 @@
 import React, { useContext } from "react";
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Redirect,
+  Switch
+} from "react-router-dom";
 import PrivateRoute from "./PrivateRouter";
 import UserProvider from "./context/UserProvider";
 
@@ -10,12 +15,17 @@ const App = () => {
   const userData = useContext(UserProvider.context);
   return (
     <Router>
-      <Route exact path="/">
-        {userData?.user ? <Redirect to="/dashboard" /> : <LoginForm />}
-      </Route>
-      <PrivateRoute path="/dashboard">
-        <Dashboard />
-      </PrivateRoute>
+      <Switch>
+        <Route exact path="/">
+          {userData?.user ? <Redirect to="/dashboard" /> : <LoginForm />}
+        </Route>
+        <PrivateRoute exact path="/dashboard">
+          <Dashboard />
+        </PrivateRoute>
+        <Route path="*">
+          <div>No page</div>
+        </Route>
+      </Switch>
     </Router>
   );
 };
