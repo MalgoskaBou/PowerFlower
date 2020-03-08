@@ -8,7 +8,7 @@ import {
 import PrivateRoute from "./PrivateRouter";
 import UserProvider from "./context/UserProvider";
 
-import LoginForm from "./LoginForm";
+import LoginForm from "./loginScreen/LoginForm";
 import Dashboard from "./Dashboard";
 
 const App = () => {
@@ -23,7 +23,7 @@ const App = () => {
           <Dashboard />
         </PrivateRoute>
         <Route path="*">
-          <div>No page</div>
+          <div>No page - 404</div>
         </Route>
       </Switch>
     </Router>
