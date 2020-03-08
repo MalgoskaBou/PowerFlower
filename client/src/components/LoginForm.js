@@ -38,7 +38,10 @@ const LoginForm = () => {
 
   const [loginUser] = useMutation(loginUserMutation);
 
-  const handleChange = e => {
+  const padding = 50;
+  const maxMove = 10;
+
+  const handleInputChange = e => {
     const value = e.target.value;
     setInputValue({
       ...inputValue,
@@ -46,7 +49,14 @@ const LoginForm = () => {
     });
   };
 
-  const handleClick = async e => {
+  const handleInputFocus = (e, isFocused) => {
+    setFocus({
+      ...focus,
+      [e.target.name]: isFocused
+    });
+  };
+
+  const handleLoginUser = async e => {
     e.preventDefault();
     let user;
     try {
@@ -57,28 +67,10 @@ const LoginForm = () => {
         },
         refetchQueries: [{ query: currentUserQuery }]
       });
-      console.log(user);
     } catch (err) {
       console.log(err);
     }
   };
-
-  const onFocus = e => {
-    setFocus({
-      ...focus,
-      [e.target.name]: true
-    });
-  };
-
-  const onBlur = e => {
-    setFocus({
-      ...focus,
-      [e.target.name]: false
-    });
-  };
-
-  const padding = 50;
-  const maxMove = 10;
 
   useEffect(() => {
     const calcEyeMove =
@@ -98,25 +90,25 @@ const LoginForm = () => {
         type="text"
         name="email"
         placeholder="e-mail"
-        onFocus={onFocus}
-        onBlur={onBlur}
+        onFocus={e => handleInputFocus(e, true)}
+        onBlur={e => handleInputFocus(e, false)}
         value={inputValue.email}
-        onChange={handleChange}
+        onChange={handleInputChange}
         ref={emailInputSize}
         autocomplete="off"
       />
       <Input
         type="password"
         name="password"
-        onFocus={onFocus}
-        onBlur={onBlur}
+        onFocus={e => handleInputFocus(e, true)}
+        onBlur={e => handleInputFocus(e, false)}
         placeholder="Password"
         value={inputValue.password}
-        onChange={handleChange}
+        onChange={handleInputChange}
         autocomplete="off"
       />
 
-      <Button type="submit" value="Log in" onClick={handleClick}>
+      <Button type="submit" value="Log in" onClick={handleLoginUser}>
         Log in
       </Button>
       <CustomLink>Forgot password</CustomLink>
