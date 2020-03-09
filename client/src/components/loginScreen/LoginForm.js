@@ -14,6 +14,14 @@ const WrapperLogin = styled(Wrapper)`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  form {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    max-width: 300px;
+    min-width: 240px;
+  }
+
   input:first-of-type {
     margin-top: 10rem;
   }
@@ -84,32 +92,33 @@ const LoginForm = () => {
   return (
     <WrapperLogin>
       <Flower focused={focus} eyeMove={eyeMove} />
+      <form onSubmit={handleLoginUser}>
+        <Input
+          type="text"
+          name="email"
+          placeholder="e-mail"
+          onFocus={e => handleInputFocus(e, true)}
+          onBlur={e => handleInputFocus(e, false)}
+          value={inputValue.email}
+          onChange={handleInputChange}
+          ref={emailInputSize}
+          autocomplete="off"
+        />
+        <Input
+          type="password"
+          name="password"
+          onFocus={e => handleInputFocus(e, true)}
+          onBlur={e => handleInputFocus(e, false)}
+          placeholder="Password"
+          value={inputValue.password}
+          onChange={handleInputChange}
+          autocomplete="off"
+        />
 
-      <Input
-        type="text"
-        name="email"
-        placeholder="e-mail"
-        onFocus={e => handleInputFocus(e, true)}
-        onBlur={e => handleInputFocus(e, false)}
-        value={inputValue.email}
-        onChange={handleInputChange}
-        ref={emailInputSize}
-        autocomplete="off"
-      />
-      <Input
-        type="password"
-        name="password"
-        onFocus={e => handleInputFocus(e, true)}
-        onBlur={e => handleInputFocus(e, false)}
-        placeholder="Password"
-        value={inputValue.password}
-        onChange={handleInputChange}
-        autocomplete="off"
-      />
-
-      <Button type="submit" value="Log in" onClick={handleLoginUser}>
-        Log in
-      </Button>
+        <Button type="submit" value="Log in">
+          Log in
+        </Button>
+      </form>
       <CustomLink>Forgot password</CustomLink>
       <span
         ref={textSize}

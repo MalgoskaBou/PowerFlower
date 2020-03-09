@@ -4,11 +4,9 @@ export default styled.input`
   background-color: transparent;
   border: none;
   height: 3rem;
-  width: 50%;
+  width: 100%;
   margin: 2rem 0;
   border-bottom: 0.5px solid #ffffff70;
-  max-width: 300px;
-  min-width: 240px;
   font-size: 2.4rem;
   color: white;
   font-weight: lighter;
