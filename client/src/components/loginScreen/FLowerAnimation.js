@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import { animateTo, morphTo, PATHS } from "../../helpers/animationHelper";
-import { ReactComponent as FlowerLogin } from "../../img/flowerLogin.svg";
+import { ReactComponent as FlowerLoginSvg } from "../../img/flowerLogin.svg";
 
 const Flower = props => {
   const flower = useRef(null);
@@ -12,7 +12,7 @@ const Flower = props => {
     const eyeL = flower.current.getElementById("eyeL_12_");
 
     if (email) {
-      animateTo(face, props.eyeMove, 10);
+      animateTo(face, props.eyePosition, 10);
       morphTo(eyeR, PATHS.openEyeR);
       morphTo(eyeL, PATHS.openEyeL);
     } else if (password) {
@@ -26,7 +26,7 @@ const Flower = props => {
     }
   });
 
-  return <FlowerLogin ref={flower} />;
+  return <FlowerLoginSvg ref={flower} />;
 };
 
 export default Flower;

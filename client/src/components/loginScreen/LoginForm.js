@@ -1,34 +1,13 @@
 import React, { useState, useRef, useEffect } from "react";
-import styled from "styled-components";
 import { useMutation } from "@apollo/react-hooks";
 import loginUserMutation from "../../queries/loginUser";
-import CustomLink from "../styled/CustomLink";
-import Button from "../styled/Button";
-import Input from "../styled/Input";
-import Wrapper from "../styled/Wrapper";
+import CustomLink from "../general-style/CustomLink";
+import Button from "../general-style/Button";
+import Input from "../general-style/Input";
+import WrapperLogin from "./WrapperLogin";
 import Flower from "./FLowerAnimation";
 import currentUserQuery from "../../queries/currentUser";
-
-const WrapperLogin = styled(Wrapper)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  form {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    max-width: 300px;
-    min-width: 240px;
-  }
-
-  input:first-of-type {
-    margin-top: 10rem;
-  }
-  input:last-of-type {
-    margin-bottom: 5rem;
-  }
-`;
+import { handleInputState } from "../../helpers/inputHelpers";
 
 const LoginForm = () => {
   const [focus, setFocus] = useState({
@@ -39,7 +18,7 @@ const LoginForm = () => {
     email: "",
     password: ""
   });
-  const [eyeMove, setEyeMove] = useState(null);
+  const [eyePosition, setEyePosition] = useState(null);
 
   const textSize = useRef(null);
   const emailInputSize = useRef(null);
@@ -48,21 +27,6 @@ const LoginForm = () => {
 
   const padding = 50;
   const maxMove = 10;
-
-  const handleInputChange = e => {
-    const value = e.target.value;
-    setInputValue({
-      ...inputValue,
-      [e.target.name]: value
-    });
-  };
-
-  const handleInputFocus = (e, isFocused) => {
-    setFocus({
-      ...focus,
-      [e.target.name]: isFocused
-    });
-  };
 
   const handleLoginUser = async e => {
     e.preventDefault();
@@ -80,38 +44,38 @@ const LoginForm = () => {
   };
 
   useEffect(() => {
-    const calcEyeMove =
+    const calceyePosition =
       ((textSize.current.clientWidth /
         (emailInputSize.current.clientWidth - padding)) *
         2 -
         1) *
       maxMove;
-    setEyeMove(calcEyeMove < maxMove ? calcEyeMove : maxMove);
+    setEyePosition(calceyePosition < maxMove ? calceyePosition : maxMove);
   }, [inputValue.email]);
 
   return (
     <WrapperLogin>
-      <Flower focused={focus} eyeMove={eyeMove} />
-      <form onSubmit={handleLoginUser}>
+      <Flower focused={focus} eyePosition={eyePosition} />
+      <form onSubmit={handleLoginUser} className="login-form">
         <Input
           type="text"
           name="email"
           placeholder="e-mail"
-          onFocus={e => handleInputFocus(e, true)}
-          onBlur={e => handleInputFocus(e, false)}
+          onFocus={e => handleInputState(e, focus, setFocus, true)}
+          onBlur={e => handleInputState(e, focus, setFocus, false)}
           value={inputValue.email}
-          onChange={handleInputChange}
+          onChange={e => handleInputState(e, inputValue, setInputValue)}
           ref={emailInputSize}
           autocomplete="off"
         />
         <Input
           type="password"
           name="password"
-          onFocus={e => handleInputFocus(e, true)}
-          onBlur={e => handleInputFocus(e, false)}
+          onFocus={e => handleInputState(e, focus, setFocus, true)}
+          onBlur={e => handleInputState(e, focus, setFocus, false)}
           placeholder="Password"
           value={inputValue.password}
-          onChange={handleInputChange}
+          onChange={e => handleInputState(e, inputValue, setInputValue)}
           autocomplete="off"
         />
 
