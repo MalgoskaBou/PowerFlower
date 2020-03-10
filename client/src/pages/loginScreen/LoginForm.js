@@ -1,9 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useMutation } from "@apollo/react-hooks";
 import loginUserMutation from "../../queries/loginUser";
-import CustomLink from "../general-style/CustomLink";
-import Button from "../general-style/Button";
-import Input from "../general-style/Input";
+import CustomLink from "../../components/general-style/CustomLink";
+import Button from "../../components/general-style/Button";
+import Input from "../../components/general-style/InputStyle";
 import WrapperLogin from "./WrapperLogin";
 import Flower from "./FLowerAnimation";
 import currentUserQuery from "../../queries/currentUser";
@@ -44,13 +44,13 @@ const LoginForm = () => {
   };
 
   useEffect(() => {
-    const calceyePosition =
+    const calcEyePosition =
       ((textSize.current.clientWidth /
         (emailInputSize.current.clientWidth - padding)) *
         2 -
         1) *
       maxMove;
-    setEyePosition(calceyePosition < maxMove ? calceyePosition : maxMove);
+    setEyePosition(calcEyePosition < maxMove ? calcEyePosition : maxMove);
   }, [inputValue.email]);
 
   return (

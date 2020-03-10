@@ -1,8 +1,10 @@
 import React, { useContext } from "react";
 import { useMutation } from "@apollo/react-hooks";
-import UserProvider from "./context/UserProvider";
-import logoutUserMutation from "../queries/logoutUser";
-import Wrapper from "./styled/Wrapper";
+import UserProvider from "../../components/context/UserProvider";
+import logoutUserMutation from "../../queries/logoutUser";
+import Wrapper from "../../components/general-style/Wrapper";
+import IconButton from "../../components/general-style/IconButton";
+import Button from "../../components/general-style/Button";
 
 const Dashboard = () => {
   const userData = useContext(UserProvider.context);
@@ -20,13 +22,15 @@ const Dashboard = () => {
   return (
     <Wrapper>
       <div>
-        Dashboard - Your zones:
+        <Button fontSize={1.4} smallerLetterSpace>
+          Dodaj przestrzeń
+        </Button>
+        <IconButton onClick={handleLogoutUser}>Wyloguj</IconButton>
         {userData.user.zones?.map(({ name, id }) => (
           <p key={id}>{name}</p>
         ))}
         <p>{`${userData.user.confirmed}`}</p>
         <p>{`${userData.user.name}`}</p>
-        <button onClick={handleLogoutUser}>Log out</button>
       </div>
     </Wrapper>
   );

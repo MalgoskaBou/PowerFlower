@@ -8,8 +8,8 @@ import {
 import PrivateRoute from "./PrivateRouter";
 import UserProvider from "./context/UserProvider";
 
-import LoginForm from "./loginScreen/LoginForm";
-import Dashboard from "./Dashboard";
+import LoginForm from "../pages/loginScreen/LoginForm";
+import Dashboard from "../pages/dashboard/Dashboard";
 
 const App = () => {
   const userData = useContext(UserProvider.context);

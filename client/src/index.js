@@ -5,6 +5,7 @@ import { ApolloProvider } from "react-apollo";
 import App from "./components/App";
 import UserProvider from "./components/context/UserProvider";
 import "./index.css";
+import "./fonts/iconFont/css/fontello.css";
 
 const client = new ApolloClient({
   credentials: "include",
