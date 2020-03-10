@@ -7,6 +7,7 @@ import IconButton from "../../components/general-style/IconButton";
 import FlexWrapper from "../../components/general-style/FlexWrapper";
 import Button from "../../components/general-style/Button";
 import Zone from "../../components/general-style/Zone";
+import Zone2 from "../../img/zone2.svg";
 
 const Dashboard = () => {
   const userData = useContext(UserProvider.context);
@@ -32,7 +33,7 @@ const Dashboard = () => {
         </IconButton>
         <FlexWrapper>
           {userData.user.zones?.map(({ name, id }) => (
-            <Zone key={id} name={name} />
+            <Zone key={id} name={name} image={Zone2} />
           ))}
         </FlexWrapper>
         <p>{`${userData.user.confirmed}`}</p>

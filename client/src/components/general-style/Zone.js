@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import React from "react";
+import zone1 from "../../img/zone1.svg";
 
 const Background = styled.div`
   background-color: #98b9ab;
@@ -7,21 +8,37 @@ const Background = styled.div`
   border: none;
   color: white;
   border-radius: 1rem;
-  min-width: 10rem;
-  min-height: 10rem;
+  width: 20rem;
+  height: 20rem;
+  margin-bottom: 2rem;
 `;
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  color: white;
+  padding: 3rem;
+`;
+
+const Img = styled.img`
+  height: 100%;
+  padding: 2rem;
+`;
+
+const Paragraph = styled.p`
+  font-weight: lighter;
+  margin-top: 2rem;
 `;
 
 const Zone = props => {
   return (
     <Wrapper>
-      <Background></Background>
+      <Background>
+        <Img src={props.image || zone1} />
+      </Background>
       <p>{props.name}</p>
+      <Paragraph>Ilość kwiatków: 3</Paragraph>
     </Wrapper>
   );
 };
