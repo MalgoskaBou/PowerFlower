@@ -25,7 +25,9 @@ const Dashboard = () => {
         <Button fontSize={1.4} smallerLetterSpace>
           Dodaj przestrzeń
         </Button>
-        <IconButton onClick={handleLogoutUser}>Wyloguj</IconButton>
+        <IconButton icon="icon-user" onClick={handleLogoutUser}>
+          Wyloguj
+        </IconButton>
         {userData.user.zones?.map(({ name, id }) => (
           <p key={id}>{name}</p>
         ))}

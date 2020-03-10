@@ -22,7 +22,7 @@ const IconButton = props => {
   return (
     <ButtonText>
       {props.children}
-      <i className="icon-user icon"></i>
+      <i className={`${props.icon || "icon-flower"} icon`}></i>
     </ButtonText>
   );
 };
