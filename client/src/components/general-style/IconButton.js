@@ -20,11 +20,15 @@ const ButtonText = styled.button`
 
 const IconButton = props => {
   return (
-    <ButtonText>
+    <ButtonText onClick={props.onClick}>
       {props.children}
-      <i className={`${props.icon || "icon-flower"} icon`}></i>
+      <i className={`${props.icon} icon`}></i>
     </ButtonText>
   );
 };
+
+IconButton.defaultProps = {
+  icon: "icon-flower"
+}
 
 export default IconButton;
