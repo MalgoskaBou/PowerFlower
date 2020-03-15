@@ -14,16 +14,3 @@ html {
 body {
   font-size: 1.8rem;
 }
-
-/* Ugly trick to remove highlite of autofill inputs on chrome */
-input:-webkit-autofill {
-  animation: autofill 0.1s both;
-}
-
-@keyframes autofill {
-  0%,
-  100% {
-    color: white;
-    background: transparent;
-  }
-}

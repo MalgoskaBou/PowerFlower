@@ -1,4 +1,12 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+const ChromeAutofill = props => keyframes`
+  0% {}
+  100% {
+    color: white;
+    background: transparent;
+    background: url(${require(`../../img/${props.name}.svg`)}) no-repeat;
+    }`;
 
 export default styled.input`
   background-color: transparent;
@@ -17,5 +25,8 @@ export default styled.input`
   }
   &:focus {
     outline-width: 0;
+  }
+  &:-webkit-autofill {
+    animation: ${props => ChromeAutofill(props)} 0.1s both;
   }
 `;
