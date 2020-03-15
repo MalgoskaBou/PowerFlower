@@ -4,21 +4,26 @@ const userData = {
   userName: "Kitek"
 };
 
-const {userEmail, userPassword, userName} = userData
+const { userEmail, userPassword, userName } = userData;
 
-const querySignUp = (email = userEmail, password = userPassword, name = userName) => (`mutation {
+const querySignUp = (
+  email = userEmail,
+  password = userPassword,
+  name = userName
+) => `mutation {
           signupUser(email:"${email}", password: "${password}", name: "${name}"){
             email
             name
             id
           }
-        }`);
+        }`;
 
-const queryLogIn = (email = userEmail, password = userPassword) => (`mutation {
+const queryLogIn = (password = userPassword, email = userEmail) => `mutation {
           loginUser(email:"${email}", password: "${password}"){
             email
             name
+            id
           }
-        }`);
+        }`;
 
 module.exports = { querySignUp, queryLogIn, userData };

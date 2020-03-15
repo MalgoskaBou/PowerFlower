@@ -12,7 +12,7 @@ router.get("/:id", async (req, res) => {
 
     return res.send(user.confirmed);
   } else {
-    res.send("invalid");
+    res.send("This link is expired");
   }
 });
 

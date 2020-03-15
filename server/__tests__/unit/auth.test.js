@@ -7,19 +7,10 @@ describe("User authorization", () => {
     };
     expect(() => Auth.authorization(req)).toThrowError(/logged in!/);
   });
-
-  it("User didn't confirm email", () => {
-    const req = {
-      user: {
-        confirmed: false
-      }
-    };
-    expect(() => Auth.authorization(req)).toThrowError(/confirm/);
-  });
 });
 
-describe("Service auth func", () => {
-  it("sendMailWIthConfirmLink", () => {
+describe("sendMailWIthConfirmLink", () => {
+  it("Create email content with confirmation link properly", () => {
     const req = {
       headers: {
         host: "http://host.com/"
