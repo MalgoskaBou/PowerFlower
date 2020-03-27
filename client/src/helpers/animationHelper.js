@@ -31,6 +31,7 @@ const animateTo = (ref, posX, posY) => {
 };
 
 const morphTo = (ref, targetPath) => {
+  if (ref === null) return;
   const interpolator = interpolate(ref.getAttribute("d"), targetPath, {
     maxSegmentLength: 2
   });

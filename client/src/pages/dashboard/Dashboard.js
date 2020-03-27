@@ -32,12 +32,12 @@ const Dashboard = () => {
           Wyloguj
         </IconButton>
         <FlexWrapper>
-          {userData.user.zones?.map(({ name, id }) => (
+          {userData?.user?.zones?.map(({ name, id }) => (
             <Zone key={id} name={name} image={Zone2} />
           ))}
         </FlexWrapper>
-        <p>{`${userData.user.confirmed}`}</p>
-        <p>{`${userData.user.name}`}</p>
+        <p>{`${userData?.user?.confirmed}`}</p>
+        <p>{`${userData?.user?.name}`}</p>
       </div>
     </Wrapper>
   );
