@@ -10,16 +10,7 @@ import UserProvider from "../context/UserProvider";
 const loginUserMutationMock = [
   {
     request: {
-      query: loginUserMutation,
-      variables: {
-        email: "email@email.com",
-        password: "dupa"
-      }
-    },
-    result: {
-      data: {
-        user: { id: "1", name: "Kitek" }
-      }
+      query: loginUserMutation
     }
   }
 ];
@@ -50,17 +41,17 @@ const currentUserQueryMock = [
   }
 ];
 
-describe("Pages are render correctly", () => {
+describe("Pages render correctly", () => {
   it("Login screen render correctly", () => {
     const { getByPlaceholderText, getByText } = render(
       <MockedProvider mocks={loginUserMutationMock} addTypename={false}>
         <LoginScreen />
       </MockedProvider>
     );
-    expect(getByPlaceholderText("e-mail")).toBeInTheDocument();
-    expect(getByPlaceholderText("Password")).toBeInTheDocument();
-    expect(getByText("Log in")).toBeInTheDocument();
-    expect(getByText("flowerLogin.svg")).toBeInTheDocument();
+    expect(getByPlaceholderText(/e-mail/i)).toBeInTheDocument();
+    expect(getByPlaceholderText(/Password/i)).toBeInTheDocument();
+    expect(getByText(/Log in/i)).toBeInTheDocument();
+    expect(getByText(/flowerLogin.svg/i)).toBeInTheDocument();
   });
 
   it("Dashboard screen render correctly", async () => {
@@ -72,7 +63,8 @@ describe("Pages are render correctly", () => {
       </MockedProvider>
     );
 
-    const zone = await waitForElement(() => getByText("Zone1"));
+    const zone = await waitForElement(() => getByText(/zone1/i));
     expect(zone).toBeInTheDocument();
+    expect(getByText(/wyloguj/i)).toBeInTheDocument();
   });
 });
