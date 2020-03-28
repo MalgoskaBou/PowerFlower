@@ -1,12 +1,13 @@
 import React, { useContext } from "react";
 import { useMutation } from "@apollo/react-hooks";
+import styled from "styled-components";
 import UserProvider from "../../components/context/UserProvider";
 import logoutUserMutation from "../../queries/logoutUser";
 import Wrapper from "../../components/general-style/Wrapper";
 import IconButton from "../../components/general-style/IconButton";
 import FlexWrapper from "../../components/general-style/FlexWrapper";
 import Button from "../../components/general-style/Button";
-import Zone from "../../components/general-style/Zone";
+import Zone from "../../components/Zone";
 import Zone2 from "../../img/zone2.svg";
 
 const Dashboard = () => {
@@ -22,23 +23,30 @@ const Dashboard = () => {
     }
   };
 
+  const ActionBar = styled.div`
+    display: flex;
+    justify-content: space-between;
+    padding: 2.5rem;
+    margin-bottom: 5rem;
+  `;
+
   return (
     <Wrapper>
-      <div>
+      <ActionBar>
         <Button fontSize={1.4} smallerLetterSpace>
           Dodaj przestrzeń
         </Button>
         <IconButton icon="icon-user" onClick={handleLogoutUser}>
           Wyloguj
         </IconButton>
-        <FlexWrapper>
-          {userData?.user?.zones?.map(({ name, id }) => (
-            <Zone key={id} name={name} image={Zone2} />
-          ))}
-        </FlexWrapper>
-        <p>{`${userData?.user?.confirmed}`}</p>
-        <p>{`${userData?.user?.name}`}</p>
-      </div>
+      </ActionBar>
+      <FlexWrapper>
+        {userData?.user?.zones?.map(({ name, id }) => (
+          <Zone key={id} name={name} image={Zone2} />
+        ))}
+      </FlexWrapper>
+      <p>{`${userData?.user?.confirmed}`}</p>
+      <p>{`${userData?.user?.name}`}</p>
     </Wrapper>
   );
 };

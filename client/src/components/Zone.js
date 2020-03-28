@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import React from "react";
-import zone1 from "../../img/zone1.svg";
+import zone1 from "../img/zone1.svg";
 
 const Background = styled.div`
   background-color: #98b9ab;

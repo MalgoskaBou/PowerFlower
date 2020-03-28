@@ -5,4 +5,5 @@ export default styled.section`
   flex-direction: ${props => props.direction || "initial"};
   justify-content: ${props => props.justifyContent || "initial"};
   align-items: ${props => props.alignItems || "initial"};
+  flex-wrap: wrap;
 `;
