@@ -8,8 +8,8 @@ const Background = styled.div`
   border: none;
   color: white;
   border-radius: 1rem;
-  width: 20rem;
-  height: 20rem;
+  width: 30rem;
+  height: 30rem;
   margin-bottom: 2rem;
 `;
 
@@ -23,7 +23,7 @@ const Wrapper = styled.div`
 
 const Img = styled.img`
   height: 100%;
-  padding: 2rem;
+  padding: 3rem;
 `;
 
 const Paragraph = styled.p`
@@ -37,7 +37,7 @@ const Zone = props => {
       <Background>
         <Img src={props.image || zone1} />
       </Background>
-      <p>{props.name}</p>
+      <p>{props.name.toUpperCase()}</p>
       <Paragraph>Ilość kwiatków: 3</Paragraph>
     </Wrapper>
   );
