@@ -14,6 +14,7 @@ export default styled.button`
   text-transform: uppercase;
   font-weight: lighter;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
   &:focus {
     outline-width: 0;
   }

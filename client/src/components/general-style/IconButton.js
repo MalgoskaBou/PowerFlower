@@ -9,6 +9,7 @@ const ButtonText = styled.button`
   font-size: ${props => (props.fontSize ? props.fontSize : 1.8)}rem;
   text-transform: uppercase;
   font-weight: normal;
+  cursor: pointer;
   &:focus {
     outline-width: 0;
   }
@@ -29,6 +30,6 @@ const IconButton = props => {
 
 IconButton.defaultProps = {
   icon: "icon-flower"
-}
+};
 
 export default IconButton;
