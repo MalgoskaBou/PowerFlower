@@ -37,7 +37,7 @@ const Dashboard = () => {
           Dodaj przestrzeń
         </Button>
         <IconButton icon="icon-user" onClick={handleLogoutUser}>
-          Wyloguj
+          Wyloguj - {`${userData?.user?.name}`}
         </IconButton>
       </ActionBar>
       <FlexWrapper>
@@ -45,8 +45,6 @@ const Dashboard = () => {
           <Zone key={id} name={name} image={Zone2} />
         ))}
       </FlexWrapper>
-      <p>{`${userData?.user?.confirmed}`}</p>
-      <p>{`${userData?.user?.name}`}</p>
     </Wrapper>
   );
 };
