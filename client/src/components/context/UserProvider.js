@@ -4,14 +4,14 @@ import currentUserQuery from "../../queries/currentUser";
 const context = createContext(null);
 
 const UserProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [userData, setUserData] = useState(null);
   const { loading, data } = useQuery(currentUserQuery);
 
   useEffect(() => {
-    setUser({ user: data?.currentUser, loading });
+    setUserData({ user: data?.currentUser, loading });
   }, [loading, data]);
 
-  return <context.Provider value={user}>{children}</context.Provider>;
+  return <context.Provider value={userData}>{children}</context.Provider>;
 };
 
 UserProvider.context = context;
