@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import React from "react";
+import { Link } from "react-router-dom";
 import zone1 from "../img/zone1.svg";
 
 const Background = styled.div`
@@ -34,9 +35,11 @@ const Paragraph = styled.p`
 const Zone = props => {
   return (
     <Wrapper>
-      <Background>
-        <Img src={props.image || zone1} />
-      </Background>
+      <Link to={`/zones/${props.zoneID}`}>
+        <Background>
+          <Img src={props.image || zone1} />
+        </Background>
+      </Link>
       <p>{props.name.toUpperCase()}</p>
       <Paragraph>Ilość kwiatków: 3</Paragraph>
     </Wrapper>

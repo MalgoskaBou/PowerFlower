@@ -42,7 +42,7 @@ const Dashboard = () => {
       </ActionBar>
       <FlexWrapper>
         {userData?.user?.zones?.map(({ name, id }) => (
-          <Zone key={id} name={name} image={Zone2} />
+          <Zone key={id} name={name} image={Zone2} zoneID={id} />
         ))}
       </FlexWrapper>
     </Wrapper>
