@@ -1,6 +1,7 @@
 import React from "react";
 import { render, waitForElement } from "@testing-library/react";
 import { MockedProvider } from "@apollo/react-testing";
+import { BrowserRouter as Router } from "react-router-dom";
 import LoginScreen from "../../pages/loginScreen/LoginForm";
 import Dashboard from "../../pages/dashboard/Dashboard";
 import loginUserMutation from "../../queries/loginUser";
@@ -63,13 +64,15 @@ describe("Pages render correctly", () => {
     expect(getByText(/flowerLogin.svg/i)).toBeInTheDocument();
   });
 
-  it.skip("Dashboard screen render correctly", async () => {
+  it("Dashboard screen render correctly", async () => {
     const { getByText } = render(
-      <MockedProvider mocks={currentUserQueryMock} addTypename={false}>
-        <UserProvider>
-          <Dashboard />
-        </UserProvider>
-      </MockedProvider>
+      <Router>
+        <MockedProvider mocks={currentUserQueryMock} addTypename={false}>
+          <UserProvider>
+            <Dashboard />
+          </UserProvider>
+        </MockedProvider>
+      </Router>
     );
 
     const zone = await waitForElement(() => getByText(/zone1/i));
@@ -77,14 +80,16 @@ describe("Pages render correctly", () => {
     expect(getByText(/wyloguj/i)).toBeInTheDocument();
   });
 
-  it.skip("Dashboard snapshot", async () => {
+  it("Dashboard snapshot", async () => {
     const tree = renderer
       .create(
-        <MockedProvider mocks={currentUserQueryMock} addTypename={false}>
-          <UserProvider>
-            <Dashboard />
-          </UserProvider>
-        </MockedProvider>
+        <Router>
+          <MockedProvider mocks={currentUserQueryMock} addTypename={false}>
+            <UserProvider>
+              <Dashboard />
+            </UserProvider>
+          </MockedProvider>
+        </Router>
       )
       .toJSON();
 
