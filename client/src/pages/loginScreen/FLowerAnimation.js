@@ -2,14 +2,14 @@ import React, { useRef, useEffect } from "react";
 import { animateTo, morphTo, PATHS } from "../../helpers/animationHelper";
 import { ReactComponent as FlowerLoginSvg } from "../../img/flowerLogin.svg";
 
-const Flower = props => {
+const Flower = (props) => {
   const flower = useRef(null);
   const { email, password } = props.focused;
 
   useEffect(() => {
-    const face = flower.current.getElementById("face");
-    const eyeR = flower.current.getElementById("eyeR_12_");
-    const eyeL = flower.current.getElementById("eyeL_12_");
+    const face = flower.current?.getElementById("face");
+    const eyeR = flower.current?.getElementById("eyeR_12_");
+    const eyeL = flower.current?.getElementById("eyeL_12_");
 
     if (email) {
       animateTo(face, props.eyePosition, 10);

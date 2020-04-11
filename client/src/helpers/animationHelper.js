@@ -18,7 +18,7 @@ const PATHS = {
     "M128.3,171.7c-0.1,0-0.2,0-0.3,0l-13.6-2.8c-0.6-0.1-1.1-0.7-1.2-1.3c-0.1-0.7,0.3-1.3,0.9-1.5l13.6-5.8c0.8-0.3,1.6,0,2,0.8c0.3,0.8,0,1.6-0.8,2l-9.1,3.9l8.8,1.8c0.8,0.2,1.3,1,1.2,1.8C129.6,171.2,129,171.7,128.3,171.7z",
 
   closedEyeR:
-    "M68.5,171.7c-0.7,0-1.3-0.5-1.5-1.2c-0.1-0.8,0.4-1.6,1.2-1.7l10.2-1.8L68,163.1c-0.8-0.3-1.2-1.1-0.9-1.9c0.3-0.8,1.1-1.2,1.9-0.9l15.8,5.8c0.6,0.2,1,0.9,1,1.5s-0.6,1.2-1.2,1.3l-15.8,2.8C68.7,171.7,68.6,171.7,68.5,171.7z"
+    "M68.5,171.7c-0.7,0-1.3-0.5-1.5-1.2c-0.1-0.8,0.4-1.6,1.2-1.7l10.2-1.8L68,163.1c-0.8-0.3-1.2-1.1-0.9-1.9c0.3-0.8,1.1-1.2,1.9-0.9l15.8,5.8c0.6,0.2,1,0.9,1,1.5s-0.6,1.2-1.2,1.3l-15.8,2.8C68.7,171.7,68.6,171.7,68.5,171.7z",
 };
 
 const animateTo = (ref, posX, posY) => {
@@ -26,14 +26,14 @@ const animateTo = (ref, posX, posY) => {
     targets: ref,
     translateX: posX,
     translateY: posY,
-    easing: "easeOutBack"
+    easing: "easeOutBack",
   });
 };
 
 const morphTo = (ref, targetPath) => {
-  if (ref === null) return;
+  if (!ref) return;
   const interpolator = interpolate(ref.getAttribute("d"), targetPath, {
-    maxSegmentLength: 2
+    maxSegmentLength: 2,
   });
 
   let val = { prop: 0 };
@@ -44,9 +44,9 @@ const morphTo = (ref, targetPath) => {
     easing: "linear",
     round: 1,
     duration: 100,
-    update: function() {
+    update: function () {
       ref.setAttribute("d", interpolator(val.prop / 100));
-    }
+    },
   });
 };
 

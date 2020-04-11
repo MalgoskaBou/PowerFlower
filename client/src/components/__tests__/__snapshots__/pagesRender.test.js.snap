@@ -1,0 +1,89 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Pages render correctly Dashboard snapshot 1`] = `
+<section
+  className="sc-AykKF gyCxNz"
+>
+  <div
+    className="sc-fzXfLQ jOVIKb"
+  >
+    <button
+      className="sc-AykKD ciZAXx"
+      fontSize={1.4}
+    >
+      Dodaj przestrzeń
+    </button>
+    <button
+      className="sc-AykKH eyrVSJ"
+      onClick={[Function]}
+    >
+      Wyloguj - 
+      undefined
+      <i
+        className="icon-user icon"
+      />
+    </button>
+  </div>
+  <section
+    className="sc-AykKI jmDIge"
+  />
+</section>
+`;
+
+exports[`Pages render correctly LoginScreen snapshot 1`] = `
+<section
+  className="sc-AykKF sc-AykKG gTdQJv"
+>
+  <svg>
+    flowerLogin.svg
+  </svg>
+  <form
+    className="login-form"
+    onSubmit={[Function]}
+  >
+    <input
+      className="sc-AykKE bVzCnM"
+      name="email"
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
+      placeholder="e-mail"
+      type="text"
+      value=""
+    />
+    <input
+      className="sc-AykKE fESoYg"
+      name="password"
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
+      placeholder="Password"
+      type="password"
+      value=""
+    />
+    <button
+      className="sc-AykKD dwveSc"
+      type="submit"
+      value="Log in"
+    >
+      Log in
+    </button>
+  </form>
+  <a
+    className="sc-AykKC fJjnQA"
+  >
+    Forgot password
+  </a>
+  <span
+    style={
+      Object {
+        "fontSize": "2.4rem",
+        "height": 0,
+        "zIndex": -9999,
+      }
+    }
+  >
+    
+  </span>
+</section>
+`;

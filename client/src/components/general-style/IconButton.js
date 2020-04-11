@@ -6,7 +6,7 @@ const ButtonText = styled.button`
   padding: 0.7rem 0px;
   border: none;
   color: white;
-  font-size: ${props => (props.fontSize ? props.fontSize : 1.8)}rem;
+  font-size: ${(props) => (props.fontSize ? props.fontSize : 1.8)}rem;
   text-transform: uppercase;
   font-weight: normal;
   cursor: pointer;
@@ -19,17 +19,18 @@ const ButtonText = styled.button`
   }
 `;
 
-const IconButton = props => {
+const IconButton = (props) => {
+  const { onClick, icon, children } = props;
   return (
-    <ButtonText onClick={props.onClick}>
-      {props.children}
-      <i className={`${props.icon} icon`}></i>
+    <ButtonText onClick={onClick}>
+      {children}
+      <i className={`${icon} icon`}></i>
     </ButtonText>
   );
 };
 
 IconButton.defaultProps = {
-  icon: "icon-flower"
+  icon: "icon-flower",
 };
 
 export default IconButton;

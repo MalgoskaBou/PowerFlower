@@ -12,11 +12,11 @@ import { handleInputState } from "../../helpers/inputHelpers";
 const LoginForm = () => {
   const [focus, setFocus] = useState({
     email: false,
-    password: false
+    password: false,
   });
   const [inputValue, setInputValue] = useState({
     email: "",
-    password: ""
+    password: "",
   });
   const [eyePosition, setEyePosition] = useState(null);
 
@@ -28,15 +28,15 @@ const LoginForm = () => {
   const padding = 50;
   const maxMove = 10;
 
-  const handleLoginUser = async e => {
+  const handleLoginUser = async (e) => {
     e.preventDefault();
     try {
       await loginUser({
         variables: {
           email: inputValue.email,
-          password: inputValue.password
+          password: inputValue.password,
         },
-        refetchQueries: [{ query: currentUserQuery }]
+        refetchQueries: [{ query: currentUserQuery }],
       });
     } catch (err) {
       console.log(err);
@@ -45,8 +45,8 @@ const LoginForm = () => {
 
   useEffect(() => {
     const calcEyePosition =
-      ((textSize.current.clientWidth /
-        (emailInputSize.current.clientWidth - padding)) *
+      ((textSize.current?.clientWidth /
+        (emailInputSize.current?.clientWidth - padding)) *
         2 -
         1) *
       maxMove;
@@ -61,21 +61,21 @@ const LoginForm = () => {
           type="text"
           name="email"
           placeholder="e-mail"
-          onFocus={e => handleInputState(e, focus, setFocus, true)}
-          onBlur={e => handleInputState(e, focus, setFocus, false)}
+          onFocus={(e) => handleInputState(e, focus, setFocus, true)}
+          onBlur={(e) => handleInputState(e, focus, setFocus, false)}
           value={inputValue.email}
-          onChange={e => handleInputState(e, inputValue, setInputValue)}
+          onChange={(e) => handleInputState(e, inputValue, setInputValue)}
           ref={emailInputSize}
           autocomplete="off"
         />
         <Input
           type="password"
           name="password"
-          onFocus={e => handleInputState(e, focus, setFocus, true)}
-          onBlur={e => handleInputState(e, focus, setFocus, false)}
+          onFocus={(e) => handleInputState(e, focus, setFocus, true)}
+          onBlur={(e) => handleInputState(e, focus, setFocus, false)}
           placeholder="Password"
           value={inputValue.password}
-          onChange={e => handleInputState(e, inputValue, setInputValue)}
+          onChange={(e) => handleInputState(e, inputValue, setInputValue)}
           autocomplete="off"
         />
 
